@@ -1,0 +1,7 @@
+name = "CAPCourseS26"
+uuid = "325d8c3c-64d7-4eca-a09e-82c33fcfa9bb"
+version = "0.1.0"
+authors = ["Joel Dahne <joel@dahne.eu>"]
+
+[workspace]
+projects = ["docs"]

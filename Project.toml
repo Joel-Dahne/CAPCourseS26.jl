@@ -5,3 +5,13 @@ authors = ["Joel Dahne <joel@dahne.eu>"]
 
 [workspace]
 projects = ["docs"]
+
+[deps]
+Arblib = "fb37089c-8514-4489-9461-98f9c8763369"
+IntervalArithmetic = "d1acc4aa-44c8-5952-acd4-ba5d80a2a253"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+
+[compat]
+Arblib = "1.6.1"
+IntervalArithmetic = "1.0.2"
+LinearAlgebra = "1.12.0"

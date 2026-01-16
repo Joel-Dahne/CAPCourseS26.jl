@@ -253,8 +253,8 @@ how we do this and what we will look is however yet to be determined
 and will depend on your interests. Some areas we could take a closer
 look at are:
 
-- PDEs:. This is the field most of my research takes place in.
-- Dynamical systems:. This is probably the field with the longest
+- PDEs: This is the field most of my research takes place in.
+- Dynamical systems: This is probably the field with the longest
   history of computer-assisted proofs and there is a number of
   interesting things we could look at here.
 

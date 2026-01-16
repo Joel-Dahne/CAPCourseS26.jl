@@ -21,7 +21,7 @@ Tucker. Over the more than two decades since Tucker's proof, there has
 been an increase in the adoption of computer assisted proofs in
 analysis. An example of a recent breakthrough result building on
 computer-assisted proofs is the [proof of blowup for the 3D Euler
-equation](https://arxiv.org/abs/2305.05660). **TODO: Expand on this**
+equation](https://arxiv.org/abs/2305.05660).
 
 The course is split into 3 parts distributed over 15 weeks. The 3
 parts are

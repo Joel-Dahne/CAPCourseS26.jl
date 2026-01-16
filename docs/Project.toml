@@ -1,7 +1,10 @@
 [deps]
+ArbExtras = "c87f5d39-a852-4149-8a88-e3a13a25afc6"
+Arblib = "fb37089c-8514-4489-9461-98f9c8763369"
 CAPCourseS26 = "325d8c3c-64d7-4eca-a09e-82c33fcfa9bb"
 Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
 IntervalArithmetic = "d1acc4aa-44c8-5952-acd4-ba5d80a2a253"
+SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
 
 [sources]
 CAPCourseS26 = {path = ".."}

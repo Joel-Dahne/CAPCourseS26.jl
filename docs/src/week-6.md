@@ -1,1 +1,1 @@
-# Week 6 - TODO
+# Week 6: TODO

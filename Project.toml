@@ -4,14 +4,13 @@ version = "0.1.0"
 authors = ["Joel Dahne <joel@dahne.eu>"]
 
 [workspace]
-projects = ["docs"]
+projects = ["docs", "notebooks", "scratch"]
 
 [deps]
 ArbExtras = "c87f5d39-a852-4149-8a88-e3a13a25afc6"
 Arblib = "fb37089c-8514-4489-9461-98f9c8763369"
 IntervalArithmetic = "d1acc4aa-44c8-5952-acd4-ba5d80a2a253"
 LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
-Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
 SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
 
 [compat]
@@ -19,5 +18,4 @@ ArbExtras = "1.1.0"
 Arblib = "1.6.1"
 IntervalArithmetic = "1.0.2"
 LinearAlgebra = "1.12.0"
-Plots = "1.41.4"
 SpecialFunctions = "2.6.1"

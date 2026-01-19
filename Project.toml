@@ -4,7 +4,7 @@ version = "0.1.0"
 authors = ["Joel Dahne <joel@dahne.eu>"]
 
 [workspace]
-projects = ["docs", "notebooks", "scratch"]
+projects = ["docs", "notebooks", "scratch", "test"]
 
 [deps]
 ArbExtras = "c87f5d39-a852-4149-8a88-e3a13a25afc6"

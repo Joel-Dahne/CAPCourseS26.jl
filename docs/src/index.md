@@ -2,7 +2,17 @@
 This website, together with the [associated
 repository](https://github.com/Joel-Dahne/CAPCourseS26.jl), contains
 the material for a topics course in computer-assisted proofs and
-rigorous numerics given at University of Minnesota Spring 2026.
+rigorous numerics given at the University of Minnesota during Spring
+2026.
+
+!!! note
+    This material is primarily meant to serve as lecture notes for the
+    course. It is made public with the hope that it could potentially
+    be useful for others as well. The material is, however, intended
+    to be used together with the lectures and labs in the course and
+    could at times be difficult to follow by itself. It's written in a
+    fairly informal style and some of the content is opinionated in
+    nature.
 
 The general idea of computer-assisted proofs (in analysis), is to
 build on the massive success of numerical methods in applied

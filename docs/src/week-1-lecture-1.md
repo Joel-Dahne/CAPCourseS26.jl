@@ -153,6 +153,19 @@ by itself. We will talk a little bit about formal proofs later in the
 course, but only with the goal of understanding the difference between
 a formal proof and a regular computer-assisted proof.
 
+!!! note
+    The definition of a computer-assisted proof that we use in here,
+    that the computer is used in the verification of the proof, not
+    only the construction, is not universally used by all
+    mathematicians. For example Terence Tao has a talk on what he
+    calls [Machine-Assisted
+    Proofs](https://www.youtube.com/watch?v=5ZIIGLiQWNM), where he
+    includes both what we in this course call computer-assisted proofs
+    but also for example using LLMs for generating proofs. He also
+    uses the terminology machine-assisted rather than
+    computer-assisted, the reason being that the word computer
+    originates from the name for human computers doing computations.
+
 ## Part 2: Introduction to rigorous numerics
 The second part of the course is where we will actually start learning
 how to build computer-assisted proofs. We will look at the field of
@@ -258,7 +271,7 @@ look at are:
   history of computer-assisted proofs and there is a number of
   interesting things we could look at here.
 
-One could also discuss things one a more meta level:
+One could also discuss things on a more meta level:
 
 - What exactly does it take to publish a paper with a
   computer-assisted proof? How does one prepare the code? How does one

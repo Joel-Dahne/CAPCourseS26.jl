@@ -6,6 +6,7 @@ The main goal of this lab is to:
   - Run a Pluto notebook
   - Bonus: Build this documentation
 - Install an editor for working with Julia files
+- Bonus: Reproduce a computer-assisted proof
 
 ## Install Julia
 The Julia website has a [page about install
@@ -228,6 +229,88 @@ code throughout the course I'll try to switch between using VS Code
 and Emacs, to give you a feeling for how things differ between
 editors.
 
-### Getting started with VS code
+We will take a closer look at how to use the editor for working with
+Julia code next week.
 
-- TODO
+## Bonus: Reproduce a computer-assisted proof
+If you feel inclined you can try to use the things you have learned
+above to reproduce a computer-assisted proof from a very recent paper.
+At the time of writing the paper has been submitted to Arxiv, but is
+still waiting to appear. At this point we have of course not learned
+enough to actually understand the proof, but you can nevertheless run
+the code.
+
+In the [Github
+repository](https://github.com/Joel-Dahne/SpectralRegularPolygon.jl)
+for the paper is all the code used for the computer-assisted proof.
+The proofs are presented in Pluto notebooks and our goal will be to
+run one of these notebooks. To do this we need to:
+
+1. Clone the repository
+2. Start Julia from the repository
+3. Install dependencies and start the Pluto notebook
+
+To clone the repository you can navigate to the directory where you
+want to place it and run
+
+``` shell
+git clone https://github.com/Joel-Dahne/SpectralRegularPolygon.jl.git
+```
+
+Next step is to start Julia from the `SpectralRegularPolygon.jl`
+directory. Here we need to make one adjustment from before however. At
+the time of writing the latest Julia version is 1.12.4 and this is the
+one that was automatically installed when you installed `juliaup`
+earlier. The computer-assisted proof was however done using Julia
+1.11.8, so we need to run that version. You can install the version
+with
+
+``` shell
+juliaup add 1.11.8
+```
+
+and to start the correct Julia version you then run
+
+``` shell
+julia +1.11.8
+```
+
+Note the extra `+1.11.8`! After you have started the right Julia
+version you should be able to follow the instructions in the README of
+the repository. Which is to first run
+
+``` julia
+using Pkg
+Pkg.activate(".")
+Pkg.instantiate()
+Pkg.test()
+```
+
+to install the dependencies and run the package tests. This will
+likely take some time! Next you want to start Pluto with
+
+``` julia
+using Pluto
+Pluto.run()
+```
+
+This should open Pluto in your browser. From your browser window you
+can then open the notebooks inside the `proofs` directory. There is
+quite a few of them and some of them take some time to run. I would
+recommend you open the one named `proposition_3_1.jl`, which has the
+nicest plots!
+
+!!! note
+    The instructions here are slightly different from the earlier ones
+    about how to start Pluto. In the earlier instructions you should
+    navigate to the `notebooks` subdirectory and run
+    `Pkg.activate(".")` from there. In these instructions you should
+    run `Pkg.activate(".")` from the root of the directory. The reason
+    for this difference is that Julia 1.12 introduced some features
+    that simplifies some parts of project managements. Since we are
+    here using Julia 1.11.8 these tools are not in place and the
+    approach is slightly different.
+
+If you have managed to get this far and run the above mentioned
+notebook, then congratulations! You have just reproduced a
+computer-assisted proof!

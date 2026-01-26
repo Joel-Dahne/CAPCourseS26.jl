@@ -71,8 +71,8 @@ Rocq](https://www.ams.org/journals/notices/200811/tx081101382p.pdf)
 ## The boolean Pythagorean triple problem
 The Pythagorean triple problem asks whether it is possible to color
 each of the positive integers either red or blue, so that no
-Pythagorean triple of integers \(a, b, c\) satisfying \(a^2 + b^2 =
-c^2\) are all the same color? This was [shown to be false in
+Pythagorean triple of integers ``(a, b, c)`` satisfying ``a^2 + b^2 =
+c^2`` are all the same color? This was [shown to be false in
 2016](https://doi.org/10.1007/978-3-319-40970-2_15), see also [this
 website with some more
 information](https://www.cs.utexas.edu/~marijn/ptn/). More precisely
@@ -92,11 +92,11 @@ Pythagorean triple. If we are given a partitioning then it is a
 relatively straightforward exercise to verify that it satisfies the
 condition. There is around 10000 Pythagorean triples below 7824, so a
 very dedicated person could even do it by hand given enough time. In
-practice this check is of course computer-assisted. Of course, one
-first has to find a candidate partitioning, this uses a tool known as
-a [SAT solver](https://en.wikipedia.org/wiki/SAT_solver). SAT solvers
-are very useful tools for computer-assisted proofs, but tend to not
-play big role in analysis problems so we won't talk about it in this
+practice this check is computer-assisted. Of course, one first has to
+find a candidate partitioning, this uses a tool known as a [SAT
+solver](https://en.wikipedia.org/wiki/SAT_solver). SAT solvers are
+very useful tools for computer-assisted proofs, but tend to not play
+big role in analysis problems so we won't talk about it in this
 course.
 
 The second part, showing that this is impossible for ``\{1, \dots,
@@ -108,7 +108,7 @@ and checking that all of these partitions contain a Pythagorean triple
 is simply not feasible.
 
 !!! note
-    In cryptography one usually assumes that ``2^128 \approx 3.4
+    In cryptography one usually assumes that ``2^{128} \approx 3.4
     \times 10^{38}`` is larger than what anyone could bruteforce.
     Using all the [energy in the observable
     universe](https://seirdy.one/posts/2021/01/12/password-strength/#conclusion-tldr)
@@ -132,14 +132,14 @@ Goldbach's weak conjecture is a famous conjecture in number theory.
 Similar to the Four color theorem this is again a problem that a
 priori requires checking an infinite number of cases. In this case it
 was however reduced to a finite computation already in 1956, though
-with an upper bound ``e^{e^{16.038}} \approx 8 \times 10^{4008659}``
+with an upper bound ``e^{e^{16.038}} \approx 8 \times 10^{4008659}``,
 way too large to make a bruteforce approach of the finite number of
 remaining numbers feasible.
 
 In 2013 the conjecture was computationally confirmed up to ``8 875 694
 145 621 773 516 800 000 000 000 \approx 8.875 \cdot 10^{30}``, see
-[10.1080/10586458.2013.831742](https://doi.org/10.1080/10586458.2013.831742).
-There is also a number of earlier results not going quite as far. The
+[this paper](https://doi.org/10.1080/10586458.2013.831742). There is
+also a number of earlier results not going quite as far. The
 computation makes use of a number of tricks to reduce the
 computational time, but eventually boils down to a large brute force
 check requiring about 40 000 core hours.

@@ -31,13 +31,13 @@ the first, and likely the most famous, computer-assisted proofs.
 
 Initially this doesn't look like a good problem for a
 computer-assisted proofs. It is straightforward to check if a specific
-map is four colorable, one simply writes a program that searches for
+map is four colorable. One simply writes a program that searches for
 four colorings. There are, however, an infinite number of maps and
 there is no way to check all of them with the computer.
 
 The first, and probably most important, part of the proof is therefore
 to reduce it to a finite number of cases. We will not go into details
-how this is done, but the general idea is to start by assuming that
+on how this is done, but the general idea is to start by assuming that
 there is a minimal counterexample. They then make use of two related
 concepts:
 
@@ -57,15 +57,15 @@ configurations in the finite unavoidable set are reducible
 configurations. In the original proof the unavoidable set consisted of
 1834 configurations and was later reduced to 1,482. Each of these
 configurations then had to be checked to be reducible. Just finding
-the set of unavoidable configuration required a significant amount of
-work, but to my understanding was to a large part done by hand.
-Checking that each of the unavoidable configurations were reducible
-was however done by the computer. Since this was still in the very
-early days of computers there was also a lot of manual labor involved
-in the process at this point.
+the set of unavoidable configurations required a significant amount of
+work, but to my understanding was in large part done by hand. Checking
+that each of the unavoidable configurations were reducible was however
+done by the computer. Since this was still in the very early days of
+computers there was also a lot of manual labor involved in the process
+at this point.
 
 In 2005 the proof was [formalized in
-Roqc](https://www.ams.org/journals/notices/200811/tx081101382p.pdf)
+Rocq](https://www.ams.org/journals/notices/200811/tx081101382p.pdf)
 (previously called Coq), which we will talk more about in Week 4.
 
 ## The boolean Pythagorean triple problem
@@ -93,10 +93,10 @@ relatively straightforward exercise to verify that it satisfies the
 condition. There is around 10000 Pythagorean triples below 7824, so a
 very dedicated person could even do it by hand given enough time. In
 practice this check is of course computer-assisted. Of course, one
-first has to find a candidate partitioning, this uses a tool know as a
-[SAT solver](https://en.wikipedia.org/wiki/SAT_solver). SAT solvers
+first has to find a candidate partitioning, this uses a tool known as
+a [SAT solver](https://en.wikipedia.org/wiki/SAT_solver). SAT solvers
 are very useful tools for computer-assisted proofs, but tend to not
-play big role in analysis problems so we want talk about it in this
+play big role in analysis problems so we won't talk about it in this
 course.
 
 The second part, showing that this is impossible for ``\{1, \dots,
@@ -129,18 +129,18 @@ Goldbach's weak conjecture is a famous conjecture in number theory.
     Every odd number greater than 5 can be written as the sum of three
     primes.
 
-Similar to the Four color theorem this is again a problem that apriori
-requires checking an infinite number of cases. In this case it was
-however reduced a finite computation already in 1956, though with an
-upper bound ``e^{e^{16.038}} \approx 8 \times 10^{4008659}`` way too
-large to make a bruteforce approach of the finite number of remaining
-numbers feasible.
+Similar to the Four color theorem this is again a problem that a
+priori requires checking an infinite number of cases. In this case it
+was however reduced to a finite computation already in 1956, though
+with an upper bound ``e^{e^{16.038}} \approx 8 \times 10^{4008659}``
+way too large to make a bruteforce approach of the finite number of
+remaining numbers feasible.
 
 In 2013 the conjecture was computationally confirmed up to ``8 875 694
 145 621 773 516 800 000 000 000 \approx 8.875 \cdot 10^{30}``, see
 [10.1080/10586458.2013.831742](https://doi.org/10.1080/10586458.2013.831742).
 There is also a number of earlier results not going quite as far. The
-computations makes use of a number of tricks to reduce the
+computation makes use of a number of tricks to reduce the
 computational time, but eventually boils down to a large brute force
 check requiring about 40 000 core hours.
 
@@ -148,7 +148,7 @@ Simultaneously there was progress on improving the bound after which
 the conjecture could be proved to hold for all odd numbers. This
 number was eventually brought down to ``10^{27}`` by [Harald Helfgott
 in 2013](https://doi.org/10.48550/arXiv.1312.7748). Together with the
-computation above this gave a full proof for the result. The paper was
+computation above this gave a full proof of the result. The paper was
 accepted for publication in Annals in 2015, though it seems like the
 [final version has not actually been
 finished](https://webusers.imj-prg.fr/~harald.helfgott/anglais/book.html).

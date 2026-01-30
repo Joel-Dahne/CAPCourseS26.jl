@@ -27,9 +27,30 @@ Pluto.run()
 
 !!! tip
     If you get an error of the form "Package Pluto not found, but a
-    package named Pluto is available from a registry." then you have
-    activated the wrong project. Make sure that you start Julia from
-    the `notebooks` directory.
+    package named Pluto is available from a registry." then you might
+    have activated the wrong project. Make sure that you start Julia
+    from the `notebooks` directory.
+
+If you can't find the `lab-2.jl` file inside the `notebooks` directory
+you might not have the latest version of this repository. You can
+update to the latest version by running
+
+``` shell
+git pull
+```
+
+If you have made any changes you might need to first remove those
+before it allows you to pull. You can revert all the changes with
+
+``` shell
+git restore --hard
+```
+
+or you can revert individual files with
+
+``` shell
+git restore name_of_file
+```
 
 ## High-level overview of Julia
 

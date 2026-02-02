@@ -9,7 +9,7 @@ discrete problems, this included
 
 This week we will look at computer-assisted proofs applied to
 continuous problems. Since computers are inherently discrete machines,
-working with continuous problems require a slightly different
+working with continuous problems requires a slightly different
 approach.
 
 Computer-assisted proofs are not applicable to all types of problems.
@@ -28,7 +28,7 @@ applicable to a problem the result should be:
 Expanding a bit on these points:
 
 1. Rigorous numerical methods will never give you better results than
-   classical non-rigorous methods.If you cannot produce very
+   classical non-rigorous methods. If you cannot produce very
    convincing numerical evidence that the result is true, then any
    attempt to rigorously prove it is doomed to fail.
 2. Numerical methods will always produce approximations. Rigorous
@@ -39,13 +39,13 @@ Expanding a bit on these points:
 3. In the end the result needs to reduce to a finite computation and
    that requires some sort of compactness. If you have an infinite
    domain it is in many cases possible to compactify it, usually at
-   the cost of introducing singularities at the boundaries that needs
+   the cost of introducing singularities at the boundaries that need
    to be dealt with.
 
 The example we will look at in this lecture is from a recent paper
 from my own research and is related to the field of spectral geometry.
 We will look at what spectral geometry is, the problem the paper
-handle and how it relate to the guiding principles mentioned above.
+handles and how it relates to the guiding principles mentioned above.
 The paper in question is:
 
 - [Monotonicity of the first Dirichlet eigenvalue of regular
@@ -65,9 +65,9 @@ look more at later in the course, are:
 
 ## Spectral geometry
 
-In spectral geometry one study how the eigenvalues and eigenfunctions
-of the Laplacian depend on the domain. In our case we are interested
-in problems of the form
+In spectral geometry one studies how the eigenvalues and
+eigenfunctions of the Laplacian depend on the domain. In our case we
+are interested in problems of the form
 
 ``` math
 \begin{cases}
@@ -102,10 +102,10 @@ Let us start by taking a look at the third paper. In this case we
 consider domains ``\mathbb{P}_N`` which are regular polygons and we
 are interested in how the first eigenvalue of these polygons,
 ``\lambda_1(\mathbb{P}_N)`` depend on ``N``. For our purposes we want
-to normalize the polygons so that the have area ``\pi``.
+to normalize the polygons so that they have area ``\pi``.
 
-If we plot ``\lambda_1(\mathbb{P}_N)`` as a function of ``N`` we the
-following picture
+If we plot ``\lambda_1(\mathbb{P}_N)`` as a function of ``N`` we have
+the following picture
 
 ![First eigenvalue of regular polygons](assets/regular-polygons-eigenvalues.png)
 
@@ -115,7 +115,7 @@ convincing, we only go up to ``N = 64`` and for the larger values the
 graph mostly looks flat in this plot. To get a slightly better figure
 let us start by noting that as ``N`` goes to infinity we would have
 that the polygons approach the unit circle. For the unit circle the
-eigenvalue can be explicitly computed, it's the first root of the
+eigenvalue can be explicitly computed; it's the first root of the
 Bessel function ``J_0``. If we plot the difference between
 ``\lambda(\mathbb{P}_N)`` and this value and give the y-axis a
 logarithmic scale we get (ignore the error bound for now, we will get
@@ -123,7 +123,7 @@ back to that).
 
 ![First eigenvalue of regular polygons compared to unit disc](assets/regular-polygons-eigenvalues-log.png)
 
-This is pretty strong numerical evidence for that eigenvalues are
+This is pretty strong numerical evidence that eigenvalues are
 monotone, at least up to ``N = 64``. Of course, a lot of the details
 are in how these values are actually computed. There are
 approximations errors in these values, can we trust that they are
@@ -160,7 +160,7 @@ figures above computed? There are many different ways of numerically
 computing eigenvalues, some of them more suited for rigorous
 verification.
 
-In this case the computations where the Method of Particular
+In this case the computations were done using the Method of Particular
 Solutions, see the paper [Reviving the Method of Particular
 Solutions](https://doi.org/10.1137/S0036144503437336) for a more
 thorough overview of the method. Recall that we are trying to solve
@@ -209,11 +209,11 @@ u_{app}(x, y) = J_{0}\left(r\sqrt{\lambda}\right)
 \right).
 ```
 
-Here ``r`` is the distance from ``(x, y)`` to the center of the
-domain, and ``(r_{n}, \theta_{n})`` are the polar coordinates of the
-point ``(x, y)`` when centered around vertex ``n`` and the orientation
-taken so that ``\theta_{n} = 0`` corresponds to the boundary segment
-between vertex ``n`` and ``n + 1``.
+Here ``\alpha = \pi / N``, ``r`` is the distance from ``(x, y)`` to
+the center of the domain, and ``(r_{n}, \theta_{n})`` are the polar
+coordinates of the point ``(x, y)`` when centered around vertex ``n``
+and the orientation taken so that ``\theta_{n} = 0`` corresponds to
+the boundary segment between vertex ``n`` and ``n + 1``.
 
 So far there is nothing in this approach which is related to rigorous
 numerics. This is just a classical numerical approach which we can use

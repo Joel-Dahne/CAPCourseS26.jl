@@ -98,11 +98,11 @@ the domain ``\Omega``.
 
 ## Monotonicity of the first Dirichlet eigenvalue of regular polygons
 
-Let us start by taking a look at the third paper. In this case we
-consider domains ``\mathbb{P}_N`` which are regular polygons and we
-are interested in how the first eigenvalue of these polygons,
-``\lambda_1(\mathbb{P}_N)`` depend on ``N``. For our purposes we want
-to normalize the polygons so that they have area ``\pi``.
+In this case we consider domains ``\mathbb{P}_N`` which are regular
+polygons and we are interested in how the first eigenvalue of these
+polygons, ``\lambda_1(\mathbb{P}_N)`` depend on ``N``. For our
+purposes we want to normalize the polygons so that they have area
+``\pi``.
 
 If we plot ``\lambda_1(\mathbb{P}_N)`` as a function of ``N`` we have
 the following picture

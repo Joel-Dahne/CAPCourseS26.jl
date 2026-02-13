@@ -1,22 +1,22 @@
 # Week 4 Lab: Trying Lean
 
-Since this is the only lab we will use Lean for we will avoid actually
-installing Lean and instead make use of online versions.
+Since this is the only lab we will use Lean for, we will avoid
+actually installing Lean and instead make use of online versions.
 
-One way to learn Lean is the [Natural number
-game](https://adam.math.hhu.de/#/g/leanprover-community/nng4),
+One way to learn Lean is the [Natural Number
+Game](https://adam.math.hhu.de/#/g/leanprover-community/nng4),
 originally developed by Kevin Buzzard. This introduces you to the
 basics of Lean by having you prove basic statements related to natural
 numbers.
 
-For this lab we will however not use this game, but instead look at
+For this lab, however, we will not use this game, but instead look at
 Lean proofs for some (very) basic analysis results. For this we will
-use the [Live Lean](https://live.lean-live.org) to give us access to
-Lean without installing it.
+use [Live Lean](https://live.lean-live.org) to give us access to Lean
+without installing it.
 
 We will start by proving that a constant sequence converges. Copy and
 paste the following code into [Live Lean](https://live.lean-live.org).
-During the lab we will go through this example together, the details
+During the lab we will go through this example together; the details
 are not contained in these notes.
 
 ``` lean-4

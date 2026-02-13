@@ -15,7 +15,7 @@ use [Live Lean](https://live.lean-live.org) to give us access to Lean
 without installing it.
 
 We will start by proving that a constant sequence converges. Copy and
-paste the following code into [Live Lean](https://live.lean-live.org).
+paste the following code into [Live Lean](https://live.lean-lang.org).
 During the lab we will go through this example together; the details
 are not contained in these notes.
 

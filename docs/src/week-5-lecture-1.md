@@ -1,8 +1,8 @@
 # Week 5 Lecture 1: Floating point numbers
 
 This lecture marks the start of our study of rigorous numerics, which
-will continue for sixth weeks. On a high level this will split these
-weeks into five parts.
+will continue for six weeks. On a high level, these weeks are divided
+into five parts.
 
 1. **Mathematical foundations of floating point arithmetic:** floating
    point formats, rounding
@@ -15,34 +15,34 @@ weeks into five parts.
 5. **Improved rigorous numerics:** isolating roots, computing
    integrals, enclosing extrema
 
-We will start with the basics, floating point numbers, and slowly work
-our way up to how rigorous numerics can be used solve problems. At
-every stage we will make sure that we understand how the computer can
-perform these computations in a rigorous way.
+We will start with the basics, floating point numbers, and
+progressively work our way up to how rigorous numerics can be used to
+solve problems. At every stage we will make sure that we understand
+how the computer can perform these computations in a rigorous way.
 
 ## Floating point numbers
 
 In rigorous numerics one usually works primarily with intervals and
 interval arithmetic, in fact the field of rigorous numerics is often
-time referred to as just interval arithmetic. The underlying basis of
+referred to as just interval arithmetic. The underlying basis of
 interval arithmetic is however floating points. To fully understand
-how interval arithmetic works we therefor have to start by
+how interval arithmetic works we therefore have to start by
 understanding how floating point numbers work. For this we will look
 at:
 
-- The Mathematical definition of floating point numbers
+- The mathematical definition of floating point numbers
 - Actual implementation of floating points
 - Arithmetic with floating point numbers
 - Rounding
 
 ## Definition of floating point numbers
 
-There are a couple of different versions of floating point numbers,
+There are several different versions of floating point numbers,
 depending on the precise use case. Let us start with the most
 mathematical definition.
 
-!!! note
-    A binary floating point number is, a rational number of the form
+!!! note "Floating point number"
+    A binary floating point number is a rational number of the form
     ``x \cdot 2^y`` where ``x, y \in \mathbb{Z}`` and ``x`` is odd, or
     one of the special values zero, plus infinity, negative infinity
     or NaN (not-a-number).
@@ -55,7 +55,7 @@ numbers, i.e.
 ```
 
 There are a number of equivalent ways of representing a floating
-point. Apart from ``x \cdot 2^y`` used above the two most common one
+point. Apart from ``x \cdot 2^y`` used above the two most common ones
 are
 
 1. ``m \cdot 2^e`` with ``1 \leq |m| < 2``
@@ -63,17 +63,17 @@ are
 
 The first one is arguably the most common format and in this case
 ``m`` is called the mantissa and ``e`` the exponent. Depending on the
-context mantissa and exponent could also used to refer ``x`` and ``y``
-or ``m'`` and ``e'``.
+context mantissa and exponent could also be used to refer to ``x`` and
+``y`` or ``m'`` and ``e'``.
 
 Generally we consider floating points of a specified precision ``p``.
 The set of floating point numbers of precision ``p`` is
 
 ``` math
-\mathbb{F}_p = \{x \cdot 2^y: x, y \in \mathbb{Z}, 1 \leq x \leq 2^p, x\ \text{odd}\} \cup \{0, \infty, -\infty, \text{NaN}\}.
+\mathbb{F}_p = \{x \cdot 2^y: x, y \in \mathbb{Z}, 1 \leq x < 2^p, x\ \text{odd}\} \cup \{0, \infty, -\infty, \text{NaN}\}.
 ```
 
-In we write the mantissa in binary it is then of the form
+If we write the mantissa in binary it is then of the form
 
 ``` math
 m = \pm 1.b_1 b_2 \dots b_{p-1}
@@ -84,8 +84,8 @@ first digit is implicitly defined to be a one. In the ``x \cdot 2^y``
 representation we also only need ``p - 1`` bits to store ``x`` since
 it is always odd and we therefore don't have to store the last bit.
 
-The set ``\mathbb{F}_p`` corresponds to the type `arf` in the Flint.
-In Julia we can get the representations ``m \cdot 2^e`` using
+The set ``\mathbb{F}_p`` corresponds to the type `arf` in Flint. In
+Julia we can get the representations ``m \cdot 2^e`` using
 `significand` and `exponent` and the representation ``m' \cdot
 2^{e'}`` using `frexp`.
 
@@ -97,11 +97,11 @@ frexp(f)
 ```
 
 Most floating point types are however more restrictive than `arf`.
-They generally also put restrictions on the range of the exponent. The
-correspond to the set
+They generally also put restrictions on the range of the exponent.
+They correspond to the set
 
 ``` math
-\mathbb{F}_{p,\check{y},\hat{y}} = \{x \cdot 2^y: x, y \in \mathbb{Z}, 1 \leq x \leq 2^p, x\ \text{odd}, \check{y} \leq y \leq \hat{y}\} \cup \{0, \infty, -\infty, \text{NaN}\}.
+\mathbb{F}_{p,\check{y},\hat{y}} = \{x \cdot 2^y: x, y \in \mathbb{Z}, 1 \leq x < 2^p, x\ \text{odd}, \check{y} \leq y \leq \hat{y}\} \cup \{0, \infty, -\infty, \text{NaN}\}.
 ```
 
 Usually the bounds for the exponent are given in terms of ``e``. For
@@ -124,7 +124,7 @@ of floating point numbers. Many common floating point types, primarily
 important:
 
 - **Signed zero:** The value zero can also have a sign, meaning that
-  `0` and `-0` are distinct values. This is useful is some cases, but
+  `0` and `-0` are distinct values. This is useful in some cases, but
   mathematically it can give some odd behavior. We will in general not
   consider signed zeros.
 
@@ -136,7 +136,7 @@ important:
   ```
 
 - **Subnormal numbers:** In general the mantissa satisfies ``1 \leq
-  |m| < 2``. For the numbers closes to zero it however allows
+  |m| < 2``. For the numbers closest to zero it however allows
   representations where ``|m| < 1``. We won't care about this at all.
 - **NaN with payload:** The NaN values can have extra data associated
   with them. This is for example used in the R programming language to
@@ -147,11 +147,11 @@ things.
 
 ## The "field" of floating point numbers and rounding
 
-We now know what floating point numbers, the next step is to be able
-to do computations on floating point numbers. In this lecture we will
-focus on basic arithmetic, i.e. addition, subtraction, multiplication
-and division. In the next lecture we will look at powers and
-elementary functions.
+We now know what floating point numbers are, the next step is to be
+able to do computations on floating point numbers. In this lecture we
+will focus on basic arithmetic, i.e. addition, subtraction,
+multiplication and division. In the next lecture we will look at
+powers and elementary functions.
 
 Except for the special values ``\pm \infty`` and NaN, floating point
 numbers are a subset of the rational numbers. We therefore have a
@@ -183,7 +183,7 @@ A rounding function is a function
 To be a proper rounding function it should satisfy
 
 1. ``\bigcirc(x) = x`` for ``x \in \mathbb{F}_{p}``
-2. ``\bigcirc(x) < \bigcirc(y)`` if ``x < y``
+2. ``\bigcirc(x) \leq \bigcirc(y)`` if ``x \leq y``
 
 We will look at three different versions of rounding:
 
@@ -198,7 +198,7 @@ The round down and up are defined by
 
 That is, they return the floating point number just below or just
 above ``x``. Round to nearest on the other hand returns the floating
-point number closes to ``x``, with ties being rounded to the one of
+point number closest to ``x``, with ties being rounded to the one of
 two which has a 0 in the last digit of the mantissa.
 
 For general use round to nearest is the by far most common rounding
@@ -238,13 +238,13 @@ a \cdot b = x_ax_b \cdot 2^{y_a + y_b}.
 ```
 
 Computing this number requires multiplying the two integers ``x_a``
-and ``x_b`` and adding the integers ``y_a`` and ``y_b``. This the
-computer can do, it is just integer arithmetic! Rounding the result
-then requires fiddling a little bit with these integers, but
-throughout the computations we are only working with integers.
+and ``x_b`` and adding the integers ``y_a`` and ``y_b``. The computer
+can this; it is just integer arithmetic! Rounding the result then
+requires some manipulation of these integers, but throughout the
+computations we are only working with integers.
 
 !!! note
-    In practice most floating point implementations do note compute
+    In practice most floating point implementations do not compute
     e.g. ``x_ax_b`` directly. They use more optimized routines that
     handle the multiplication and the rounding in one step. At the
     most fundamental level everything is however just integer
@@ -252,14 +252,14 @@ throughout the computations we are only working with integers.
 
 With this we finally have a mathematically well defined notion of
 arithmetic for floating points! This definition does however come with
-a number of very awkward mathematical properties. These issues are a
-result of the problem that rounding does not compose. For example,
+a number of awkward mathematical properties. These issues are a result
+of the problem that rounding does not compose. For example,
 ``\bigcirc(\bigcirc(x + y) + z)`` is in general not the same as
 ``\bigcirc(x + \bigcirc(y + z))`` and neither of them are (in general)
 the same as ``\bigcirc(x + y + z)``. This means that floating point
 addition is non-associative (it is however commutative).
 
-Working with non-associate operations is in general very tedious, it
+Working with non-associative operations is in general very tedious, it
 means you have to be extremely careful when you specify your
 expressions to make sure that the order of the operations is well
 defined.
@@ -268,7 +268,7 @@ defined.
     Consider the sum
 
     ``` math
-    S = \sum_{n = 1}^{10^4} frac{1}{n}.
+    S = \sum_{n = 1}^{10^4} \frac{1}{n}.
     ```
 
     If we were to exactly compute this sum and then round it to a
@@ -282,7 +282,7 @@ defined.
 
     If we were to perform this sum exactly we would get the floating point
     number ``\bigcirc(S')``. Of course, we also have rounding when computing
-    the sum. If we sum from the left we would get
+    the sum. If we sum from the left we get
 
     ``` math
     S_l = \bigcirc(\cdots\bigcirc(\bigcirc(\bigcirc(1 / 1) + \bigcirc(1 / 2)) + \bigcirc(1 / 3))\cdots),
@@ -318,7 +318,7 @@ defined.
     S = Float64(sum(n -> 1 // BigInt(n), 1:10^4))
     ```
 
-    We can compoare this to ``S_l`` and ``S_r``
+    We can compare this to ``S_l`` and ``S_r``
 
     ``` @repl 1
     S_l - S

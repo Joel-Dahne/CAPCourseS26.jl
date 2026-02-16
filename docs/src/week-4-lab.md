@@ -11,7 +11,7 @@ numbers.
 
 For this lab, however, we will not use this game, but instead look at
 Lean proofs for some (very) basic analysis results. For this we will
-use [Live Lean](https://live.lean-live.org) to give us access to Lean
+use [Live Lean](https://live.lean-lang.org) to give us access to Lean
 without installing it.
 
 We will start by proving that a constant sequence converges. Copy and

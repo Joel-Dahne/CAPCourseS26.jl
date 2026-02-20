@@ -13,8 +13,8 @@ begin
     using PlutoUI
     using Plots
 
-    using CAPCourseS26: from_a_b, to_a_b, add_rnd, sub_rnd, mul_rnd, div_rnd, fma_rnd
-	using CAPCourseS26: to_a_fix_b # Bonus function
+    using CAPCourseS26:
+        from_a_b, to_a_b, to_a_fix_b, add_rnd, sub_rnd, mul_rnd, div_rnd, fma_rnd
 
     setprecision(Arb, 16)
 end
@@ -91,6 +91,27 @@ to_a_b(from_a_b(2^16 + 1, 0, RoundUp, verbose = true))
 # ╔═╡ e2bb3fc2-97f0-4167-ba15-c1e166c901eb
 to_a_b(from_a_b(2^16 + 1, 0, RoundNearest, verbose = true))
 
+# ╔═╡ 8ece2c35-5b6c-4115-85bb-07c4c1622c8e
+md"""
+To make it easier to compare numbers it is often convenient to use a
+representation that has the same exponent for the two numbers. The
+`to_a_fix_b` function can be used for that. 
+"""
+
+# ╔═╡ 505a746f-9934-45b0-ab04-9d1fa7fced5f
+to_a_fix_b(from_a_b(2^16 + 1, 0, RoundDown), 1)
+
+# ╔═╡ d31ce547-225e-4330-b1e9-a9880a873e9e
+to_a_fix_b(from_a_b(2^16 + 1, 0, RoundUp), 1)
+
+# ╔═╡ 39f8fcbc-852e-4b90-a956-9e1c85c98222
+md"""
+It throws an error if ``a`` would not be an integer with the specified ``b``
+"""
+
+# ╔═╡ 60ec4de3-6ace-486b-8af6-9cf599213a77
+to_a_fix_b(Arf(1), 1)
+
 # ╔═╡ 92fd8a0c-2f01-418d-92c3-2d33eb59e37e
 md"""
 ### Rounded arithmetic
@@ -116,9 +137,7 @@ to_a_b(div_rnd(from_a_b(2, 0), from_a_b(3, 0), RoundNearest, verbose = true))
 
 # ╔═╡ 7cab8606-b52e-4e91-9f8e-b266165f6094
 md"""
-## Addition
-
-Let us try out the rounded addition!
+## Working with rounded arithmetic
 """
 
 # ╔═╡ 343c8dfd-4cff-44e6-8492-ebea01fd1317
@@ -150,6 +169,45 @@ md"""
 What happens if you change the `RoundNearest` to `RoundUp`?
 `RoundDown`?
 """
+
+# ╔═╡ d62d6795-5038-40dc-a560-8b40cf09a737
+md"""
+### Rounding for compositions
+
+We don't have a function for directly computing ``x^3`` that gives us
+a correctly rounded result. We can compute `x * x * x`, but that
+rounds twice. Getting a correctly rounded result can be difficult. We
+cat however easily get an upper or lower bound if we are fine with it
+not being the tightest one. The following function computes an upper
+bound of ``x^3``
+"""
+
+# ╔═╡ 417bdaa2-aa3a-43dd-9c81-05693af3d560
+function cube_upper(x::Arf)
+    return mul_rnd(mul_rnd(x, x, RoundUp), x, RoundUp)
+end
+
+# ╔═╡ b169b4a8-f4e7-4723-8aa5-c84ac298a845
+md"""
+TASK: Implement the same version that rounds down
+"""
+
+# ╔═╡ 8502cbd0-9773-4bd6-905d-3f1cde084f97
+function cube_lower(x::Arf)
+    return mul_rnd(mul_rnd(x, x, RoundDown), x, RoundDown)
+end
+
+# ╔═╡ b7c7e917-7986-4a4f-9861-e704f9e0a206
+to_a_fix_b(cube_upper(from_a_b(12313, 0)), 25)
+
+# ╔═╡ bc699ac2-0a04-43c2-8b5d-0220c178ce71
+to_a_fix_b(cube_lower(from_a_b(12313, 0)), 25)
+
+# ╔═╡ cf6d6008-0d53-433a-b6ad-1391f2b0cb7b
+to_a_fix_b(from_a_b(12313^3, 0, RoundUp), 25) # Correctly rounded
+
+# ╔═╡ 385d8fe8-fc19-4db8-98fb-24c1f7c18449
+to_a_fix_b(from_a_b(12313^3, 0, RoundDown), 25) # Correctly rounded
 
 # ╔═╡ 88dcfb77-f947-4903-81da-53d8ac1f5b4d
 md"""
@@ -431,6 +489,11 @@ far
 # ╠═d2d9f1bb-4a0f-4e99-aff3-dd614f51c376
 # ╠═d3e0d711-9901-48a3-b09c-538582fc0df1
 # ╠═e2bb3fc2-97f0-4167-ba15-c1e166c901eb
+# ╟─8ece2c35-5b6c-4115-85bb-07c4c1622c8e
+# ╠═505a746f-9934-45b0-ab04-9d1fa7fced5f
+# ╠═d31ce547-225e-4330-b1e9-a9880a873e9e
+# ╟─39f8fcbc-852e-4b90-a956-9e1c85c98222
+# ╠═60ec4de3-6ace-486b-8af6-9cf599213a77
 # ╟─92fd8a0c-2f01-418d-92c3-2d33eb59e37e
 # ╠═4480b2f4-b20b-4c82-83db-a48e9ba74e16
 # ╠═26ca6626-da4b-457c-886f-b0b076ea550d
@@ -444,6 +507,14 @@ far
 # ╠═a59dacab-0aa9-4723-ac4c-1d19ffb7fd0d
 # ╠═e9d8c5fc-36b5-4308-8072-5aa2b303ee19
 # ╟─8e37f70a-380d-4652-966c-17b01729e281
+# ╟─d62d6795-5038-40dc-a560-8b40cf09a737
+# ╠═417bdaa2-aa3a-43dd-9c81-05693af3d560
+# ╟─b169b4a8-f4e7-4723-8aa5-c84ac298a845
+# ╠═8502cbd0-9773-4bd6-905d-3f1cde084f97
+# ╠═b7c7e917-7986-4a4f-9861-e704f9e0a206
+# ╠═bc699ac2-0a04-43c2-8b5d-0220c178ce71
+# ╠═cf6d6008-0d53-433a-b6ad-1391f2b0cb7b
+# ╠═385d8fe8-fc19-4db8-98fb-24c1f7c18449
 # ╟─88dcfb77-f947-4903-81da-53d8ac1f5b4d
 # ╟─fc40012d-9d75-4f61-a44e-6bf0feeac544
 # ╟─6c67677a-e594-47e5-839e-5fe9235564a4

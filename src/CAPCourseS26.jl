@@ -1,5 +1,7 @@
 module CAPCourseS26
 
-greet() = print("Hello World!")
+using Arblib
+
+include("lab-5.jl")
 
 end # module CAPCourseS26

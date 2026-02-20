@@ -14,6 +14,7 @@ begin
     using Plots
 
     using CAPCourseS26: from_a_b, to_a_b, add_rnd, sub_rnd, mul_rnd, div_rnd, fma_rnd
+	using CAPCourseS26: to_a_fix_b # Bonus function
 
     setprecision(Arb, 16)
 end

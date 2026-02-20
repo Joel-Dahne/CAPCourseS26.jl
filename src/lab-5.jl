@@ -45,6 +45,26 @@ function to_a_b(x::Arf)
 end
 
 """
+    to_a_fix_b(x::Arf, b::Integer)
+
+Compute integer `a` such that `a * 2^b = x`. Throws an error if this
+is not possible.
+"""
+function to_a_fix_b(x::Arf, b::Integer)
+    a = Arblib.fmpz_struct()
+    flag = ccall(
+        Arblib.@libflint(arf_get_fmpz_fixed_si),
+        Cint,
+        (Ref{Arblib.fmpz_struct}, Ref{Arblib.arf_struct}, Int),
+        a,
+        x,
+        b,
+    )
+    @assert iszero(flag)
+    return (BigInt(a), BigInt(b))
+end
+
+"""
     add_rnd(x::Arf, y::Arf, rnd::RoundingMode; verbose::Bool = false)
 
 Compute `x + y` rounded according to `rnd`. If `verbose` is true then

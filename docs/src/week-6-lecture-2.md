@@ -4,7 +4,7 @@ In this lecture we will begin our study of interval arithmetic, which
 will be our primary tool for the rest of the course. We will look at
 the basics of interval arithmetic, a couple of different flavors of
 interval arithmetic and discuss how they are implemented on the
-computer. For this lecture we will stick to basic arithmetic, in the
+computer. For this lecture we will stick to basic arithmetic; in the
 next lecture we will look at how to extend this to general functions.
 
 ## Real interval arithmetic
@@ -20,7 +20,7 @@ operation ``\star`` of ``+, -, \cdot, /`` we let
 \bm{a} \star \bm{b} = \{a \star b: a \in \bm{a}, b \in \bm{b}\}.
 ```
 
-A crucial aspect of this definition is that the right hand side is an
+A crucial aspect of this definition is that the right-hand side is an
 interval (assuming ``0 \not\in \bm{b}`` for division). This is a
 direct consequence of the operations being continuous. To compute the
 resulting intervals we only need to make use of the endpoints, more
@@ -33,7 +33,7 @@ precisely we have the following formulas:
    \overline{a}\overline{b}), \max(\underline{a}\underline{b},
    \underline{a}\overline{b}, \overline{a}\underline{b},
    \overline{a}\overline{b})]``
-4. ``\bm{a} / \bm{b} = \bm{a} \cdot [1 / \overline{b}, 1 / \underline{b}]`` TODO: Is this correct?
+4. ``\bm{a} / \bm{b} = \bm{a} \cdot [1 / \overline{b}, 1 / \underline{b}]``
 
 !!! note "Example"
     We have
@@ -47,7 +47,7 @@ precisely we have the following formulas:
     \end{align*}
     ```
 
-If ``r(x)`` is a rational function the we can extend ``r`` to work on
+If ``r(x)`` is a rational function then we can extend ``r`` to work on
 intervals by using our interval versions of interval arithmetic.
 
 !!! note "Example"
@@ -137,7 +137,7 @@ play a role in how you work and think about it:
 
 ### Real numbers or floating points
 
-In the previous section we look at interval arithmetic over the real
+In the previous section we looked at interval arithmetic over the real
 numbers. For actual computations we will therefore have to work with
 intervals where the endpoints are floating point numbers. When
 performing arithmetic operations we will have to take into account
@@ -154,10 +154,10 @@ floating points then
    \nabla(\overline{a}\overline{b})), \max(\Delta(\underline{a}\underline{b}),
    \Delta(\underline{a}\overline{b}), \Delta(\overline{a}\underline{b}),
    \Delta(\overline{a}\overline{b}))]``
-4. ``\bm{a} / \bm{b} = \bm{a} \cdot [\nabla(1 / \overline{b}), \Delta(1 / \underline{b})]`` TODO: Is this correct?
+4. ``\bm{a} / \bm{b} = \bm{a} \cdot [\nabla(1 / \overline{b}), \Delta(1 / \underline{b})]``
 
 In many contexts the distinction between the endpoints being real
-numbers of floating points is however not that important. Even when
+numbers or floating points is however not that important. Even when
 working with real numbers the computed intervals will contain
 overestimations, see the example in the previous section. The extra
 overestimations coming from the floating point rounding do therefore
@@ -167,13 +167,12 @@ even if in the end you have to implement it in floating points.
 
 ### Intervals or balls
 
-So far we have represented our intervals by a using a lower and upper
+So far we have represented our intervals by using a lower and upper
 bound, ``\bm{a} = [\underline{a}, \overline{a}]``. It is of course
 mathematically equivalent to represent them with a midpoint and a
 radius, ``\bm{a} = [m \pm r]``. How to perform arithmetic operations
 does however change slightly. If ``\bm{a} = [m_1 \pm r_1]`` and
 ``\bm{b} = [m_2 \pm r_2]`` then
-
 
 1. ``\bm{a} + \bm{b} = [(m_1 + m_2) \pm (r_1 + r_2)]``
 2. ``\bm{a} - \bm{b} = [(m_1 - m_2) \pm (r_1 + r_2)]``
@@ -196,7 +195,7 @@ This means that
 \bm{a} \cdot \bm{b} \subseteq [m_1m_2 \pm (|m_1|r_2 + |m_2|r_1 + r_1r_2)].
 ```
 
-For division one similarly have (assuming ``r_2 < |m_2|`` to avoid
+For division, one similarly has (assuming ``r_2 < |m_2|`` to avoid
 division by zero)
 
 ``` math
@@ -217,7 +216,7 @@ the computation of the midpoint.
 
 It might seem like the ball representation is just more complicated
 than the version with lower and upper bounds. It does however have an
-important technical benefit, when working in high precision you can
+important technical benefit: when working in high precision you can
 still use a low precision representation for the radius. For high
 precision it is therefore up to a factor 2 faster than working with
 the lower and upper bounds separately.
@@ -229,25 +228,25 @@ consider.
 
 ### Wide intervals or thin intervals
 
-One of the things that I believe make the biggest difference to how
+One of the things that I believe makes the biggest difference to how
 you should conceptually approach interval arithmetic is whether you
 are working with wide intervals or thin intervals. The methods and
 algorithms you want to use often heavily depend on this.
 
-In general, if an interval is to be considered wide or not depends on
-the ratio between the midpoint and the radius. If the radius is factor
+In general, whether an interval is considered wide or not depends on
+the ratio between the midpoint and the radius. If the radius is a factor
 ``10^{-10}`` smaller one could consider it a thin interval, if the
 radius is not more than a factor ``10^{-2}`` smaller then it could be
 considered wide. In between these two factors you get a hybrid region
-were both view points are useful. These numbers of course depend on
+where both viewpoints are useful. These numbers of course depend on
 the context.
 
 For thin intervals it is usually useful to take the ball arithmetic
-approach. Where you think of the midpoint as your approximation and
+approach, where you think of the midpoint as your approximation and
 the radius as a small error. Since the radius is small you can use
 perturbative methods for bounds, which is usually simpler.
 
 For wide intervals the lower and upper bound version is often more
 useful. Perturbative error bounds usually give very bad results in
-this case. Often times you want to rely on monotonicity to be able to
+this case. Often, you want to rely on monotonicity to be able to
 compute accurate enclosures.

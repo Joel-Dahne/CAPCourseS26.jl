@@ -19,7 +19,7 @@ use the ones in the notebook.
 
 ## Intro to IntervalArithmetic.jl
 
-Let us start by taking a close look at IntervalArithmetic.jl.
+Let us start by taking a closer look at IntervalArithmetic.jl.
 
 ### Construction
 
@@ -67,7 +67,7 @@ floating points and guarantees that the given number is contained in
 the interval.
 
 ``` @repl 1
-parse(Interval{Float64}, "0.1") # This printing of this is weird, see next section
+parse(Interval{Float64}, "0.1") # The printing of this is weird, see next section
 
 parse(Interval{Float64}, "[0.1, 0.2]")
 ```

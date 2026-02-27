@@ -10,6 +10,13 @@ represented by a midpoint and a radius. We will make use of both of
 these packages throughout the course, though likely Arblib.jl to a
 larger extent (mostly because I'm more used to that package).
 
+For the first part of the lab (intro to IntervalArithmetic.jl and
+Arblib.jl) we will use the Julia REPL and the instructions below. For
+the second part (computing ``\sin``) we will use the `lab-6.jl` Pluto
+notebook that you can find in the `notebooks` directory. The
+instructions for the second part are also included below, but we will
+use the ones in the notebook.
+
 ## Intro to IntervalArithmetic.jl
 
 Let us start by taking a close look at IntervalArithmetic.jl.
@@ -17,7 +24,7 @@ Let us start by taking a close look at IntervalArithmetic.jl.
 ### Construction
 
 Intervals are constructed using the `interval` function. With
-`interval(a, b)` we can constructing the interval ``[a, b]`` and with
+`interval(a, b)` we can construct the interval ``[a, b]`` and with
 `interval(a)` we get the thin interval ``[a, a]``.
 
 ``` @repl 1
@@ -41,7 +48,7 @@ We can create intervals with endpoints of different types by giving
 the type as first argument.
 
 ``` @repl 1
-interval(BigFloat, 1, 2) # Note thet ₂₅₆ in the output, this is the BigFloat precision
+interval(BigFloat, 1, 2) # Note the ₂₅₆ in the output, this is the BigFloat precision
 
 typeof(interval(BigFloat, 1, 2))
 
@@ -53,6 +60,17 @@ typeof(interval(Rational{Int}, 1, 2))
 In practice we will mostly use `Float64` and sometimes `BigFloat`.
 Having endpoints which are rational numbers can sometimes be useful,
 but we won't see it too much.
+
+Finally, you can create an interval from a string with its decimal
+representation using `parse`. This avoid issues with rounding of
+floating points and guarantees that the given number is contained in
+the interval.
+
+``` @repl 1
+parse(Interval{Float64}, "0.1") # This printing of this is weird, see next section
+
+parse(Interval{Float64}, "[0.1, 0.2]")
+```
 
 ### Printing
 
@@ -76,8 +94,8 @@ As you can see in the above examples it also prints `_com` after the
 interval. This is a
 [decoration](https://juliaintervals.github.io/IntervalArithmetic.jl/stable/manual/construction/#Decorations).
 They keep track of extra information regarding the functions used to
-compute the interval. We wont care about these for now, but might come
-back to them later in the course.
+compute the interval. We won't care about these for now, but might
+come back to them later in the course.
 
 To print everything you can use `setdisplay(:full)`.
 
@@ -165,8 +183,8 @@ diam(x)
 ### Construction
 
 For Arblib.jl balls are constructed using the `Arb` constructor. With
-`Arb(x)` we get a ball enclosing the value of `x`, with `Arb((a, b))`
-we get a ball enclosing the interval ``[a, b]``.
+`Arb(x)` we get a ball enclosing the value of ``x``, with `Arb((a,
+b))` we get a ball enclosing the interval ``[a, b]``.
 
 ``` @repl
 using Arblib
@@ -355,7 +373,7 @@ my_sin(10.0) # For large values of x we would need more terms
 sin(10.0)
 ```
 
-Let us know implement `Interval{Float64}` and `Arb` versions of this
+Let us now implement `Interval{Float64}` and `Arb` versions of this
 function! Here we do want to correctly handle the error bounds as
 well.
 
@@ -369,27 +387,28 @@ function my_sin(x::Arb; N::Integer = 6)
 end
 ```
 
-``` @example 2
-using Arblib, IntervalArithmetic # hide
+!!! details "Solution"
+    ``` @example 2
+    using Arblib, IntervalArithmetic # hide
 
-function my_sin(x::Interval{Float64}; N::Integer = 6)
-    y = zero(x)
-    for n in 0:N
-        y += (-1)^n * x^(2n + 1) / factorial(2n + 1)
+    function my_sin(x::Interval{Float64}; N::Integer = 6)
+        y = zero(x)
+        for n in 0:N
+            y += (-1)^n * x^(2n + 1) / factorial(2n + 1)
+        end
+        err = abs(x)^(2N + 3) / factorial(2N + 3)
+        return y + interval(-sup(err), sup(err))
     end
-    err = abs(x)^(2N + 3) / factorial(2N + 3)
-    return y + interval(-sup(err), sup(err))
-end
 
-function my_sin(x::Arb; N::Integer = 6)
-    y = zero(x)
-    for n in 0:N
-        y += (-1)^n * x^(2n + 1) / factorial(2n + 1)
+    function my_sin(x::Arb; N::Integer = 6)
+        y = zero(x)
+        for n in 0:N
+            y += (-1)^n * x^(2n + 1) / factorial(2n + 1)
+        end
+        err = abs(x)^(2N + 3) / factorial(2N + 3)
+        return add_error(y, err)
     end
-    err = abs(x)^(2N + 3) / factorial(2N + 3)
-    return add_error(y, err)
-end
-```
+    ```
 
 ``` @repl 2
 setdisplay(:full) # To see the full output
@@ -401,17 +420,19 @@ my_sin(Arb(1))
 sin(Arb(1))
 Arblib.contains(my_sin(Arb(1)), sin(Arb(1)))
 
-my_sin(interval(10)) # For large values of x we get enormus error bounds
+my_sin(interval(10)) # For large values of x we get enormous error bounds
 my_sin(Arb(10))
 ```
 
 With these two implementations, some of the things we can look at are:
 
 - How does the radius of the `Interval` and `Arb` versions compare?
-- What happens if you increase `N`? Hint: At some point you will get
+  For example for ``x = 1``.
+- What happens if you increase ``N``? Hint: At some point you will get
   an error and need to adjust the code.
 - What happens for wide input? ``x = [0.999, 1.001],\ [0.9, 1.1],\ [0,
   1],\ [0, 2]``? Or even larger!
-- Can we do better for wide input?
+- Can we do better for wide input? There are two reasonable
+  approaches, one better for `Interval` and one for `Arb`.
 - For large values of ``x`` you first want to reduce the argument to a
   smaller value using the periodicity. How could this be done?

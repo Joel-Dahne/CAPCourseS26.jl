@@ -275,7 +275,7 @@ And for the lower bound a naive version would be
 
 # ╔═╡ 64ca13d7-c011-49f2-bc34-8fe6d88228e8
 function sin_lower_wrong(x::Arf)
-    return x - x^3 / factorial(3) + x^5 / factorial(5) - Arf(1) / factorial(7)
+    return x - x^3 / factorial(3) + x^5 / factorial(5) - Arf(1) / (factorial(7) * 2^7)
 end
 
 # ╔═╡ 9ac0749e-77e9-4be5-b379-9fe3b86fc7fc

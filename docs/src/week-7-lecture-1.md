@@ -32,14 +32,14 @@ of any function. For ``\bm{f}`` to be a useful interval extension of
 
 In practical applications, functions with singularities are usually
 handled by returning an interval version of `NaN`. For
-IntervalArithmetic.jl this is represented by an `NaI` (Not an
-Interval), for Arblib.jl this is represented by a ball with `NaN` as
-midpoint (referred to as an indeterminate ball).
+IntervalArithmetic.jl this is represented by an `NaI`
+(Not-an-Interval), for Arblib.jl this is represented by a ball with
+`NaN` as midpoint (referred to as an indeterminate ball).
 
 Both IntervalArithmetic.jl and Arblib.jl (as well as most other
 interval arithmetic packages) implement interval extensions of most
 trigonometric, exponential and logarithmic functions. For example, the
-following functions are supported by both packages.
+following functions (and many more) are supported by both packages.
 
 - ``e^x``, ``\log``, ``e^x - 1``, ``\log(1 + x)``, ``\log_2``,
   ``\log_{10}``.
@@ -113,10 +113,10 @@ Plotting the function on ``[0, 5]`` we get
 ``` @example 1
 using Plots
 plot(range(0, 5, 1000), f, legend = false)
-savefig("week-7-lecture-2-f.svg"); nothing # hide
+savefig("week-7-lecture-1-f.svg"); nothing # hide
 ```
 
-![](week-7-lecture-2-f.svg)
+![](week-7-lecture-1-f.svg)
 
 From this graph we can discern many properties of the function, for
 example that it has two zeros on the interval. Of course, this plot is
@@ -134,10 +134,10 @@ xs = mince(interval(0, 5), N)
 ys = f.(xs)
 plot(vcat.(xs, ys), legend = false)
 plot!(range(0, 5, 1000), f)
-savefig("week-7-lecture-2-f-interval.svg"); nothing # hide
+savefig("week-7-lecture-1-f-interval.svg"); nothing # hide
 ```
 
-![](week-7-lecture-2-f-interval.svg)
+![](week-7-lecture-1-f-interval.svg)
 
 This gives us a plot consisting of a number of boxes that together
 enclose the true graph of the function ``f``. This type of plot is
@@ -161,10 +161,10 @@ colors = map(ys) do y
 end
 plot(vcat.(xs, ys), color = colors, legend = false)
 plot!(range(0, 5, 1000), f)
-savefig("week-7-lecture-2-f-zeros.svg"); nothing # hide
+savefig("week-7-lecture-1-f-zeros.svg"); nothing # hide
 ```
 
-![](week-7-lecture-2-f-zeros.svg)
+![](week-7-lecture-1-f-zeros.svg)
 
 In any interval colored red the function is proved to be positive, in
 any interval colored blue it is proved to be negative. Any zero of
@@ -172,13 +172,13 @@ any interval colored blue it is proved to be negative. Any zero of
 intervals are however not guaranteed to contain zeros, for example
 there is a false positive around ``x \approx 1.5`` in the graph above.
 However, if we have a red interval followed by any number of green
-intervals and then a blue interval we get from the mean value theorem
-that the function is guaranteed to have at least one zero in the green
-segment, similarly if the red and blue intervals swap place. From the
-plot we can therefore guarantee that the function has at least two
-zeros! From the box-plot alone it is not possible to prove that these
-two zeros are the only ones, in the next lecture we will handle
-problem by also computing enclosures of the derivative of the
+intervals and then a blue interval we get from the intermediate value
+theorem that the function is guaranteed to have at least one zero in
+the green segment, similarly if the red and blue intervals swap place.
+From the plot we can therefore guarantee that the function has at
+least two zeros! From the box-plot alone it is not possible to prove
+that these two zeros are the only ones, in the next lecture we will
+handle problem by also computing enclosures of the derivative of the
 function. One way to avoid the false zero is to use smaller
 subintervals. If `N` in the code above is changed to `100` (from `75`)
 then this false positive disappears (you can try this yourself).
@@ -205,10 +205,10 @@ colors = map(ys) do y
 end
 plot(vcat.(xs, ys), color = colors, legend = false)
 plot!(range(0, 5, 1000), f)
-savefig("week-7-lecture-2-f-maximum.svg"); nothing # hide
+savefig("week-7-lecture-1-f-maximum.svg"); nothing # hide
 ```
 
-![](week-7-lecture-2-f-maximum.svg)
+![](week-7-lecture-1-f-maximum.svg)
 
 From this we can see that the maximum is attained either near zero or
 near ``4``. To prove that the maximum is attained near zero we would
@@ -232,10 +232,10 @@ colors = map(ys) do y
 end
 plot(vcat.(xs, ys), color = colors, legend = false)
 plot!(range(0, 5, 1000), f)
-savefig("week-7-lecture-2-f-minimum.svg"); nothing # hide
+savefig("week-7-lecture-1-f-minimum.svg"); nothing # hide
 ```
 
-![](week-7-lecture-2-f-minimum.svg)
+![](week-7-lecture-1-f-minimum.svg)
 
 Let us finally consider the problem of computing the integral
 

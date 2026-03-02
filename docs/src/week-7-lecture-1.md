@@ -93,6 +93,14 @@ functions. As a first step we will compute an enclosure of the graph
 of a function, which can then be used to study properties of the
 function.
 
+!!! tip "Interactive notebook"
+    For the live lecture we will use the Pluto notebook
+    `week-7-lecture-1.jl` found in the `notebooks` directory. It
+    contains similar plots to the ones below, but with added support
+    for live changes. The plots below should be enough to follow the
+    lecture notes, but the notebook could potentially be useful as
+    well.
+
 For this we will consider the function ``f(x) = \sin(5x) - 5x + x^2 +
 4``, which in Julia becomes
 

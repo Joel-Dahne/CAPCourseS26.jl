@@ -6,6 +6,9 @@ else
     Documenter.HTML()
 end
 
+# This is required for GR plots to work without a display
+ENV["GKSwstype"] = "100"
+
 makedocs(
     sitename = "CAPCourseS26.jl",
     modules = [CAPCourseS26],

@@ -103,7 +103,6 @@ f(x) = sin(5x) - 5x + x^2 + 4
 Plotting the function on ``[0, 5]`` we get
 
 ``` @example 1
-ENV["GKSwstype"] = "100" # hide
 using Plots
 plot(range(0, 5, 1000), f, legend = false)
 savefig("week-7-lecture-2-f.svg"); nothing # hide

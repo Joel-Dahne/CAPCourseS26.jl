@@ -34,7 +34,7 @@ savefig("week-7-lecture-2-f-zeros.svg"); nothing # hide
 ![](week-7-lecture-2-f-zeros.svg)
 
 With a little bit of work we can isolate the two regions, merging any
-adjecant intervals in the process.
+adjacent intervals in the process.
 
 ``` @example 1
 # Find all intervals which might have roots
@@ -57,9 +57,9 @@ Our goal in this lecture will be to prove that these two intervals
 each have a unique root and also isolate it to high precision.
 
 !!! warning "Printing of endpoints"
-    As discussed in the last lecture the printed value of intervals
-    can in general not be trusted. The endpoints for the two intervals
-    are actually
+    As discussed in the last lecture, the printed values of intervals
+    cannot, in general, be trusted. The endpoints for the two
+    intervals are actually
 
     ``` @repl 1
     BigFloat(inf(roots[1]))
@@ -147,7 +147,7 @@ intervals. Next we will compute refined enclosures of these roots. To
 begin with using a bisection method.
 
 Let ``f`` be a continuous function on an interval ``[a, b]``
-satisfying that ``\sign(f(a))\sign(f(a)) < 0``. Let ``c = \frac{a +
+satisfying that ``\sign(f(a))\sign(f(b)) < 0``. Let ``c = \frac{a +
 b}{2}`` denote the midpoint of the interval. If ``\sign(f(c)) =
 \sign(f(a))`` then ``f`` has a zero in the interval ``[c, b]``, if
 ``\sign(f(c)) = \sign(f(b))`` then it has a zero in the interval ``[a,
@@ -305,7 +305,7 @@ While the Newton method is useful in many cases it has two drawbacks:
 2. We do not directly get any information about how close we are to a
    zero. If ``f(x_n)`` is very close to zero then it is reasonable to
    guess that ``x_n`` is very close to a zero of ``f``, but this
-   doesn't given any concrete bounds and is not always true.
+   doesn't give any concrete bounds and is not always true.
 
 The interval Newton method is a version of the classical Newton method
 that completely solves the second problem, and to some extent handles
@@ -324,13 +324,13 @@ for some ``\xi`` between ``x_0`` and ``x``. Using that ``f(x_0) = 0``
 and solving for ``x_0`` gives us
 
 ``` math
-x_0 = x - frac{f(x)}{f'(\xi)} \in x - frac{f(x)}{f'(\bm{x})} =: N(\bm{x}, x).
+x_0 = x - \frac{f(x)}{f'(\xi)} \in x - \frac{f(x)}{f'(\bm{x})} =: N(\bm{x}, x).
 ```
 
 Since ``x_0 \in \bm{x}`` by assumption we also have ``x_0 \in
 N(\bm{x}, x) \cap \bm{x}``, for any ``x \in \bm{x}``. In practice,
 taking ``x`` to be the midpoint of ``\bm{x}`` is the best choice. We
-therefore defined the interval Newton operator ``N(\bm{x})`` by
+therefore define the interval Newton operator ``N(\bm{x})`` by
 
 ``` math
 N(\bm{x}) = N(\bm{x}, c) = c - \frac{f(c)}{f'(\bm{x})},
@@ -348,7 +348,7 @@ we have the following two results.
 
 !!! note "Theorem 1"
     Assume that ``N(\bm{x}_0)`` is well-defined. If ``\bm{x}_0``
-    contains a zero ``x_0`` of ``f``, then so does all iterates
+    contains a zero ``x_0`` of ``f``, then so do all iterates
     ``\bm{x}_k``. Furthermore, the intervals ``\bm{x}_k`` form a
     nested sequence converging to ``x_0``.
 
@@ -363,13 +363,14 @@ we have the following two results.
 !!! note "Proof of Theorem 1"
     That all iterates ``\bm{x}_k`` contain a zero follows from the
     above by induction. To show that they form a nested sequence we
-    get two cases
+    get two cases. Here we let ``c_k`` be the midpoint of
+    ``\bm{x}_k``.
 
-    1. If at any point we have that ``f(c_k) = 0`` then ``N(\bm{x}_k, c_k) = [c]``
+    1. If at any point we have that ``f(c_k) = 0`` then ``N(\bm{x}_k, c_k) = [c_k]``
        and hence ``\bm{x}_{k + 1}`` and all future iterates are exactly the
-       thin interval given by the zero.
+       thin interval containing the zero.
     2. If ``f(c_k) \not= 0`` for all ``k`` then it suffices to note that ``c_k`` is
-       not contained in ``N(\bm{x}_k, c_k)``. This follows from that
+       not contained in ``N(\bm{x}_k, c_k)``. This follows from the fact that
        ``f'(\bm{x}_k)`` has a fixed sign and hence so does ``\frac{f(c)}{f'(\bm{x})}``.
        It follows that
        ``\operatorname{rad}(\bm{x}_{k + 1}) < \frac{1}{2}\operatorname{rad}(\bm{x}_{k})``
@@ -379,8 +380,8 @@ we have the following two results.
 
     1. This is an immediate consequence of Theorem 1, since if
        ``\bm{x}`` contains a zero then so does ``N(\bm{x}) \cap
-       \bm{x}``, which means that ``N(\bm{x}) \cap \bm{x}`` cannot be
-       empty.
+       \bm{x}`` which contradicts the assumption that the intersection
+       is empty.
     2. From the assumption ``N(\bm{x}) \subseteq \bm{x}`` it follows that
        ``c - \frac{f(c)}{f'(\xi)} \in \bm{x}`` for all ``\xi \in \bm{x}``.
        If we let
@@ -397,12 +398,12 @@ we have the following two results.
        the graph of ``f`` must intersect the ``x``-axis somewhere within the set
 
        ``` math
-       \{t_\xi(x) = 0: \xi \in \bm{x}}.
+       \{t_\xi(x) = 0: \xi \in \bm{x}\}.
        ```
 
        By the above this set is contained in ``\bm{x}``. It follows that the graph
        of ``f`` intersects the ``x``-axis in the interval ``\bm{x}``, proving the
-       existence of a zero. The uniqueness follows directly from that ``N(\bm{x})``
+       existence of a zero. The uniqueness follows directly from the fact that ``N(\bm{x})``
        being well-defined implies that ``f'`` is non-zero in the interval.
 
 We are now ready to implement the interval Newton method.

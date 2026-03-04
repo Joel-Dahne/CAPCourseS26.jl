@@ -419,7 +419,7 @@ we have the following two results.
     The uniqueness follows directly from the fact that ``N(\bm{x})`` being
     well-defined implies that ``f'`` is non-zero in the interval.
 
-![](interval-newton-idea.png)
+![](assets/interval-newton-idea.png)
 
 We are now ready to implement the interval Newton method.
 

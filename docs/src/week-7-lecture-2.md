@@ -75,14 +75,14 @@ is unique. To verify the existence and uniqueness of a root for a
 continuously differentiable function ``f`` on an interval ``[a, b]``
 it suffices to verify that
 
-1. ``\sign(f(a))\sign(f(b)) < 0``: If the signs at the endpoints
-   differ then by the intermediate value theorem there is at least one
-   root in the interval.
+1. ``\operatorname{sign}(f(a))\operatorname{sign}(f(b)) < 0``: If the
+   signs at the endpoints differ then by the intermediate value
+   theorem there is at least one root in the interval.
 2. ``0 \not\in \mathcal{R}(f'; [a, b])``: If ``f'`` is non-zero on the
    interval then there is at most one root in the interval.
 
 Both of these are easily verified with interval arithmetic. For the
-first root we get for the first condition.
+first root we get for the first condition:
 
 ``` @repl 1
 a = interval(inf(roots[1]))
@@ -147,12 +147,14 @@ intervals. Next we will compute refined enclosures of these roots. To
 begin with using a bisection method.
 
 Let ``f`` be a continuous function on an interval ``[a, b]``
-satisfying that ``\sign(f(a))\sign(f(b)) < 0``. Let ``c = \frac{a +
-b}{2}`` denote the midpoint of the interval. If ``\sign(f(c)) =
-\sign(f(a))`` then ``f`` has a zero in the interval ``[c, b]``, if
-``\sign(f(c)) = \sign(f(b))`` then it has a zero in the interval ``[a,
-c]``. If it happens that ``\sign(f(c)) = 0``, then there of course is
-a zero exactly at ``c``.
+satisfying that ``\operatorname{sign}(f(a))\operatorname{sign}(f(b)) <
+0``. Let ``c = \frac{a + b}{2}`` denote the midpoint of the interval.
+If ``\operatorname{sign}(f(c)) = \operatorname{sign}(f(a))`` then
+``f`` has a zero in the interval ``[c, b]``, if
+``\operatorname{sign}(f(c)) = \operatorname{sign}(f(b))`` then it has
+a zero in the interval ``[a, c]``. If it happens that
+``\operatorname{sign}(f(c)) = 0``, then we have found a zero exactly
+at ``c``.
 
 We want to apply this idea to our function ``f``. In this case we will
 switch to using Arblib.jl for the computations.
@@ -170,14 +172,15 @@ sign(f(a)) == sign(f(c))
 @assert sign(f(a)) == sign(f(c)) # hide
 ```
 
-We can see that ``\sign(f(c)) = \sign(f(a))``, hence we have a zero on
-the interval ``[a, c]``!
+We can see that ``\operatorname{sign}(f(c)) =
+\operatorname{sign}(f(a))``, hence we have a zero on the interval
+``[a, c]``!
 
-Note that ``\sign(f(a))`` will return an `Arb` value that encloses the
-sign of the input. For non-zero input this will be equal to either
-`Arb(1)` or `Arb(-1)`. If the input overlaps zero we get an `Arb`
-value containing a combination of ``-1``, ``0`` and ``1``, depending
-on how the input overlaps zero.
+Note that ``\operatorname{sign}(f(a))`` will return an `Arb` value
+that encloses the sign of the input. For non-zero input this will be
+equal to either `Arb(1)` or `Arb(-1)`. If the input overlaps zero we
+get an `Arb` value containing a combination of ``-1``, ``0`` and
+``1``, depending on how the input overlaps zero.
 
 ``` @repl 1
 typeof(sign(f(a)))
@@ -377,34 +380,46 @@ we have the following two results.
        and the width of the intervals hence converge to zero.
 
 !!! note "Proof of Theorem 2"
+    The first part is an immediate consequence of Theorem 1, since if
+    ``\bm{x}`` contains a zero then so does ``N(\bm{x}) \cap \bm{x}``
+    which contradicts the assumption that the intersection is empty.
 
-    1. This is an immediate consequence of Theorem 1, since if
-       ``\bm{x}`` contains a zero then so does ``N(\bm{x}) \cap
-       \bm{x}`` which contradicts the assumption that the intersection
-       is empty.
-    2. From the assumption ``N(\bm{x}) \subseteq \bm{x}`` it follows that
-       ``c - \frac{f(c)}{f'(\xi)} \in \bm{x}`` for all ``\xi \in \bm{x}``.
-       If we let
+    For the second part, the idea is to prove that the graph of ``f`` lies
+    in between two lines that both cross the ``x``-axis inside the
+    interval ``\bm{x}``, it would then follow that ``f`` also crosses the
+    ``x``-axis inside the interval ``\bm{x}``. The idea is visualized in the
+    figure below, where the area between the two lines is region shaded in
+    orange.
 
-       ``` math
-       t_\xi(x) = f(c) + f'(\xi)(x - c),
-       ```
+    Since ``f'`` is continuous on ``\bm{x}`` there are points ``\xi^+``
+    and ``\xi^-`` where it attains its maximum and minimum respectively.
+    Let ``t_{\xi^+}(x)`` and ``t_{\xi^-}(x)`` denote the two lines
 
-       the solution to ``t_\xi(x) = 0`` is exactly ``c - \frac{f(c)}{f'(\xi)}``
-       and hence it lies in ``\bm{x}``. Since ``f'`` is continuous on ``\bm{x}``
-       there are points ``\xi^+`` and ``\xi^-`` where it attains its maximum and
-       minimum respectively. Thus, for all ``x \in \bm{x}`` the function value
-       ``f(x)`` lies between ``t_{\xi^+}(x)`` and ``t_{\xi^-}(x)``. Therefore,
-       the graph of ``f`` must intersect the ``x``-axis somewhere within the set
+    ``` math
+    t_{\xi^+}(x) = f(c) + f'(\xi^+)(x - c),
+    \text{ and }
+    t_{\xi^-}(x) = f(c) + f'(\xi^-)(x - c),
+    ```
 
-       ``` math
-       \{t_\xi(x) = 0: \xi \in \bm{x}\}.
-       ```
+    It follows that ``f(x)`` lies in between ``t_{\xi^+}(x)`` and
+    ``t_{\xi^-}(x)``. The two lines crosses the ``x``-axis at ``c -
+    \frac{f(c)}{f'(\xi^+)}`` and ``c - \frac{f(c)}{f'(\xi^-)}``
+    respectively. Since ``\xi^+ \in \bm{x}`` we have
 
-       By the above this set is contained in ``\bm{x}``. It follows that the graph
-       of ``f`` intersects the ``x``-axis in the interval ``\bm{x}``, proving the
-       existence of a zero. The uniqueness follows directly from the fact that ``N(\bm{x})``
-       being well-defined implies that ``f'`` is non-zero in the interval.
+    ``` math
+    c - \frac{f(c)}{f'(\xi^+)} \in c - \frac{f(c)}{f'(\bm{x})} = N(\bm{x}),
+    ```
+
+    and similarly for ``\xi^-``. Since ``N(\bm{x}) \subseteq \bm{x}`` by
+    assumption it follows that both ``t_{\xi^+}(x)`` and ``t_{\xi^-}(x)``
+    crosses the ``x``-axis inside the interval ``\bm{x}``. Since ``f`` is
+    sandwiched in between these two lines it must also cross the
+    ``x``-axis inside ``\bm{x}``.
+
+    The uniqueness follows directly from the fact that ``N(\bm{x})`` being
+    well-defined implies that ``f'`` is non-zero in the interval.
+
+![](interval-newton-idea.png)
 
 We are now ready to implement the interval Newton method.
 
@@ -460,3 +475,8 @@ and
 ``` @repl 1
 root_2_refined, isproved_2 = refine_newton(f, df, Arb(roots[2]))
 ```
+
+Compared to the bisection method we need significantly fewer
+iterations! You can try yourself at higher precision. How many
+iterations do you need for ``256`` bits of precision? How about
+``10000``?

@@ -130,7 +130,7 @@ union_interval(xs_2[79], xs_2[80], xs_2[81], xs_2[82], xs_2[83]) # Manually take
 md"""
 !!! note "Remark"
     It's important to note that the above computation proves that
-    there are no zeros to the left of `root_candidate`. This means
+    there are no (positive) zeros to the left of `root_candidate`. This means
     that if we can prove that `root_candidate` has a unique zero, then
     this **must** be the first zero of ``J_0(x)``.
 """
@@ -212,7 +212,7 @@ that the interval Newton method based on the iteration
 with
 
 ``` math
-N(\boldsymbol{x}) = c - \frac{f(c)}{f'(\boldsymbol{x})},
+N(\boldsymbol{x}) = c - \frac{f(c)}{f'(\boldsymbol{x})}.
 ```
 
 We define ``N``
@@ -1606,10 +1606,10 @@ version = "1.13.0+0"
 # ╠═b1b15def-055c-4aef-bc01-0204b93d3d7f
 # ╟─537a9788-f1cb-40d0-9f93-9ac5dec0f3eb
 # ╠═a6d2a23e-c892-489f-95bd-2b4c74e7ff2e
-# ╠═b5c44552-2619-486b-a700-fd2a43f91092
+# ╟─b5c44552-2619-486b-a700-fd2a43f91092
 # ╠═2da5ace7-7929-455f-85eb-b75269005c70
 # ╠═70470560-8dc3-4279-a974-515345e2a440
-# ╟─ff7c1e98-9a9e-4839-917c-80543755d05b
+# ╠═ff7c1e98-9a9e-4839-917c-80543755d05b
 # ╠═174a2bcf-3f9b-4948-a4b2-fb5a26037c85
 # ╟─b6fb8acf-e740-4f5c-9f5e-69f7f749b50b
 # ╠═f7e8b3d6-67b6-44ec-9816-f4fa7cc19950

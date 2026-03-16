@@ -4,12 +4,12 @@ It is common in computer-assisted proofs that you need to compute
 interval enclosures not only of a function, but also of its
 derivatives. For example, the interval Newton method required us to
 compute enclosures of the first derivative. One option is to implement
-these derivatives by hand, that's what we did for the interval Newton
+these derivatives by hand; that's what we did for the interval Newton
 method. For more complicated functions, and in particular higher order
 derivatives, this, however, quickly becomes unfeasible.
 
-Instead of computing the derivatives by hand we want to have the
-computer compute it for us. On a high level there are three different
+Instead of computing the derivatives by hand, we want to have the
+computer compute them for us. On a high level there are three different
 approaches for this:
 
 1. Symbolic differentiation
@@ -17,8 +17,8 @@ approaches for this:
 3. Automatic differentiation
 
 They all have their pros and cons and the best alternative depends on
-the context. For computer-assisted proofs the by far most useful one
-is however automatic differentiation.
+the context. For computer-assisted proofs, by far the most useful approach
+is automatic differentiation.
 
 ## Automatic differentiation
 
@@ -46,7 +46,7 @@ is to me the mathematically simplest version to understand.
 Let us start by briefly discussing the differences between forward and
 backward differentiation, without worrying too much about the details
 for how the computations are performed. Let us consider a function
-``f: \mathbb{R}^n \to \mathbb{R}^m$`` with the goal of computing the
+``f: \mathbb{R}^n \to \mathbb{R}^m`` with the goal of computing the
 Jacobian ``Df``. The forward differentiation computes the Jacobian
 column by column. At each step it computes the derivative with respect
 to one variable at a time, i.e. it computes the derivatives
@@ -65,19 +65,19 @@ respect to all of the inputs, i.e. it computes the gradient
 
 This means that computing the Jacobian of ``f`` using forward
 differentiation takes ``n`` steps, whereas computing it using
-backwards differentiation takes ``m`` steps. This is enough to see one
+backward differentiation takes ``m`` steps. This is enough to see one
 of the main uses cases for backward differentiation, optimization. In
 optimization, in particular machine learning, ``m`` is usually ``1``
-and ``n`` is huge (in the order of billions of even trillions). In
+and ``n`` is huge (in the order of billions or even trillions). In
 that case backward differentiation is the only feasible option.
 
 For computer-assisted proofs ``n`` and ``m`` are usually small, often
 between ``1`` and ``3``. This would indicate that for these problems
 the choice between forward and backward differentiation shouldn't be
-to important. However, in practice the algorithms for backwards
+too important. However, in practice the algorithms for backward
 differentiation are significantly more complicated to implement and
 require orders of magnitude more work to get performant. Even highly
-optimized backwards differentiation will usually come at a large
+optimized backward differentiation will usually come at a large
 performance penalty. This means that for these low dimensional
 problems forward differentiation is almost always the way to go.
 
@@ -107,7 +107,7 @@ f(ArbSeries((x_0, 1), degree = n))
 ```
 
 !!! note "Remark"
-    Note that when the Taylor series will always be printed using the
+    Note that the Taylor series will always be printed using the
     variable `x`. The series object only consists of the list of
     coefficients and the degree, it doesn't contain any information
     about the variable name nor the point ``x_0`` at which the
@@ -188,8 +188,8 @@ f_mul_g_series_2 = f_series * g_series
 ```
 
 !!! note "Remark"
-    Note that the formula for the product is equivalent to taking
-    multiplying the two polynomials ``\sum_{k = 0}^n f_k x^k`` and
+    Note that the formula for the product is equivalent to multiplying
+    the two polynomials ``\sum_{k = 0}^n f_k x^k`` and
     ``\sum_{k = 0}^n g_k x^k`` and truncating the degree to ``n``.
     This is in fact how Arblib computes the result, more precisely it
     uses the function
@@ -239,7 +239,7 @@ Multiplying both sides by ``x``, we get
 Using the product rule and matching coefficients gives us
 
 ``` math
-k(e^{f})_k = \sum{i = 1}^k if_i(e^{f})_{k - i}.
+k(e^{f})_k = \sum_{i = 1}^k if_i(e^{f})_{k - i}.
 ```
 
 We also know that the constant term is given by ``(e^{f})_0 =
@@ -249,7 +249,7 @@ e^{f_0}``, giving us
 (e^{f})_k =
 \begin{cases}
   e^{f_0} \text{ if } k = 0,\\
-  \frac{1}{k}\sum{i = 1}^k if_i(e^{f})_{k - i} \text{ if } k > 0.
+  \frac{1}{k}\sum_{i = 1}^k if_i(e^{f})_{k - i} \text{ if } k > 0.
 \end{cases}
 ```
 
@@ -285,9 +285,9 @@ cos(f_series)
     sophisticated methods than the one we have discussed here. For
     example, ``e^x`` uses the algorithm above for small lengths but
     switches to a Newton iteration approach for higher degrees, see
-    [arb_poly_exp_series](https://flintlib.org/doc/arb_poly.html#c.arb_poly_exp_series).
+    [`arb_poly_exp_series`](https://flintlib.org/doc/arb_poly.html#c.arb_poly_exp_series).
 
-The final piece of the puzzle to understand we computed the Taylor
+The final piece of the puzzle to understand how we computed the Taylor
 expansion of ``e^x + x^2`` at ``x_0`` is to write ``x`` as ``x = x_0 +
 1 \cdot (x - x_0)``. In code this would be
 

@@ -90,7 +90,7 @@ truncated Taylor series. Given a function ``f: \mathbb{R} \to
 ``f`` at ``x_0`` of degree ``n``.
 
 ``` math
-f(x - x_0) = \sum_{k = 0}^n p_k (x - x_0)^k + \mathcal{O}((x - x_0)^{n + 1}).
+f(x - x_0) = \sum_{k = 0}^n f_k (x - x_0)^k + \mathcal{O}((x - x_0)^{n + 1}).
 ```
 
 To see how this works in action, let us take ``f(x) = e^x +

@@ -183,6 +183,7 @@ a couple of benefits with the Taylor series evaluation:
    thus compute the above as
 
    ``` @repl 1
+   using ArbExtras
    P_f = f_x0_series.poly # Set P_f to the polynomial associated with our expansion
    max_P_f = ArbExtras.maximum_polynomial(P_f, lbound(a - x_0), ubound(b - x_0))
    max_f = max_P_f + R * (ab - x_0)^(n + 1)

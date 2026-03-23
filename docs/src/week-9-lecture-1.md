@@ -1,12 +1,12 @@
 # Week 9 Lecture 1: Overview of FLINT and Arblib.jl
 
 We have now covered many of the basic ideas in interval arithmetic and
-rigorous numerics. There are however still lots of things we haven't
+rigorous numerics. There are, however, still lots of things we haven't
 talked about. The goal of this week is to get a broad overview of all
-the capabilities of FLINT/Arblib.jl and IntervalArithmetic.jl have,
+the capabilities that FLINT/Arblib.jl and IntervalArithmetic.jl have,
 starting with FLINT/Arblib.jl today.
 
-Our primary reference for today is the [FLINT documentation for real
+Our primary references for today are the [FLINT documentation for real
 and complex
 numbers](https://flintlib.org/doc/#real-and-complex-numbers) as well
 as the [Arblib.jl
@@ -46,8 +46,8 @@ they have in Arblib.jl.
   consists of an `Arf` midpoint and a `Mag` radius. It implements a
   lot of functionality and, unless otherwise specified, all operations
   are fully rigorous.
- - `arf_t` / `Acf`: This represents a complex number and consists of a
-   pair of `Acf` values, representing the real and imaginary parts.
+- `acf_t` / `Acf`: This represents a complex number and consists of a
+   pair of `Arf` values, representing the real and imaginary parts.
    Similar to `Arf` it has very limited functionality by itself.
 - `acb_t` / `Acb`: This represents a complex number and consists of a
   pair of `Arb` values, representing the real and imaginary parts.
@@ -141,14 +141,14 @@ Some of the most important groups are:
 1. Special functions, including support for Taylor arithmetic
 2. Linear algebra routines
 3. Polynomial routines
-3. Rigorous integration
-4. Basic root finding
-5. FFT
+4. Rigorous integration
+5. Basic root finding
+6. FFT
 
 ### Special functions
 
-This is the most largest class of functionality and the documentation
-are spread out over many different pages. For example, the ``\zeta``
+This is the largest class of functionality and the documentation is
+spread out over many different pages. For example, the ``\zeta``
 function is described in the documentation for
 [arb.h](https://flintlib.org/doc/arb.html#zeta-function) and
 [acb.h](https://flintlib.org/doc/acb.html#zeta-function), whereas
@@ -175,7 +175,7 @@ only be accessed through the low level interface.
 ``` @repl 1
 using SpecialFunctions
 
-gamma(Arb(0.5)) # This is accesible in the high level interface
+gamma(Arb(0.5)) # This is accessible in the high level interface
 gamma(AcbSeries((1 + 2im, 1)))
 
 Arblib.dirichlet_lerch_phi!(Acb(), Acb(1), Acb(2), Acb(3)) # This needs the low level interface
@@ -189,7 +189,7 @@ These are documented in
 solvers for linear systems (which also allows for computation of
 inverses and determinants) and computation of eigenvalues.
 
-Most of these routines are accesible from the high level interface,
+Most of these routines are accessible from the high level interface,
 though the low level interface can give more control. For eigenvalues,
 only `AcbMatrix` is supported.
 
@@ -267,7 +267,7 @@ transforms over general Abelian groups. But it does implement the
 usual FFT with
 [acb_dft](https://flintlib.org/doc/acb_dft.html#c.acb_dft).
 
-This only available from the low level interface. Currently the
+This is only available from the low level interface. Currently the
 wrapping doesn't support precomputations.
 
 ``` @repl 1

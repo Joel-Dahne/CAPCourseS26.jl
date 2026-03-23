@@ -217,7 +217,7 @@ interpolation and root finding.
 Some of these are available from the high level interface, others
 require the low level interface.
 
-``` @repl
+``` @repl 1
 p = ArbPoly([1, 2, 3, 4])
 
 p(Arb(1 // 3))
@@ -237,7 +237,7 @@ convergence in the regions where they are not holomorphic.
 
 This is available through the high level interface.
 
-``` @repl
+``` @repl 1
 Arblib.integrate(x -> sin(exp(x)), Arb(0), Arb(8))
 
 Arblib.integrate(x -> besselj(Acb(0), x)^2 + sin(2x), Acb(1 + im), Acb(7im))

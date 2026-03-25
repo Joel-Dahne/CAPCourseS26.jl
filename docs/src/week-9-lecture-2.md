@@ -6,12 +6,12 @@ IntervalArithmetic.jl. Similar to FLINT it supports basic arithmetic,
 elementary functions and basic linear algebra routines. It does not
 implement any special functions or handling of polynomials. The focus
 of the lecture will be on some of the functionality that either
-differs or doesn't exist Arblib.jl package, namely:
+differs or doesn't exist in the Arblib.jl package, namely:
 
 1. Decorations
 2. The "NG" label
 3. Predicates
-3. Automatric differentiation using
+4. Automatic differentiation using
    [ForwardDiff.jl](https://github.com/JuliaDiff/ForwardDiff.jl)
 
 ## Decorations
@@ -39,8 +39,8 @@ interval(1, ill)
 
 Before we get into exactly what these decorations mean, let us
 consider a motivating example for why these decorations can be useful.
-Consider the problem of proving the existence a zero on the interval
-``[4, 5]`` for the function
+Consider the problem of proving the existence of a zero on the
+interval ``[4, 5]`` for the function
 
 ``` math
 f(x) = 2\sin(x) + \sign(\cos(x / 3)) + 2.
@@ -58,7 +58,7 @@ sign(f(interval(4))) != sign(f(interval(5)))
 ```
 
 So the signs at the endpoints do differ. However, plotting ``f`` we
-see that there is no zero on the interval
+see that there is no zero on the interval.
 
 ``` @repl 1
 using Plots
@@ -88,7 +88,7 @@ f(interval(3, 4))
 ```
 
 In this case the decoration is `com`, which guarantees the continuity
-of the function
+of the function.
 
 More precisely, the decorations have the following meanings (see the
 associated
@@ -107,7 +107,7 @@ associated
 In the above example we got the decoration `def`, which does not imply
 that the function is continuous. As usual with interval arithmetic,
 overestimations in the enclosures can lead to more pessimistic
-decorations then necessary. For example, the function
+decorations than necessary. For example, the function
 
 ``` math
 \sign(1 + x^2 - x^2)
@@ -121,8 +121,8 @@ x = interval(-1, 1)
 sign(1 + x^2 - x^2)
 ```
 
-The issue in this case being that we get an overestimation of ``1 +
-x^2 - x^2`` when computed in interval arithmetic.
+The issue in this case is that we get an overestimation of ``1 + x^2 -
+x^2`` when computed in interval arithmetic.
 
 The `trv` decoration occurs for functions that are not defined
 everywhere on the input interval. In this case the computed enclosure
@@ -142,7 +142,7 @@ sqrt(interval(-1))
 
 In the examples above you might have seen that the intervals sometimes
 have a trailing `_NG`, and sometimes don't. This is short for "Not
-Guaranteed" and is part of the libraries tools for reducing the risk
+Guaranteed" and is part of the library's tools for reducing the risk
 of accidentally mixing rigorous and non-rigorous computations. They
 signal that the computations could have been "poisoned" by
 non-rigorous computations.
@@ -195,8 +195,8 @@ If you do this for data that is not rigorous you can get wrong results.
 
 ``` @repl 1
 x = interval(2)
-sin(x * (2π)) # This shoud contain zero, but does not!
-sin(x * exact(2π)) # This shoud contain zero, but does not!
+sin(x * (2π)) # This should contain zero, but does not!
+sin(x * exact(2π)) # This should contain zero, but does not!
 sin(x * 2interval(π)) # This does contain zero!
 sin(x * exact(2) * interval(π)) # So does this!
 ```
@@ -204,7 +204,7 @@ sin(x * exact(2) * interval(π)) # So does this!
 The guaranteed flag can be very helpful for reducing the risk of
 accidentally introducing non-rigorous computations in your
 computer-assisted proofs. This is in particular helpful to find places
-where computations where done with `Float64` values. For example
+where computations were done with `Float64` values. For example
 
 ``` @repl 1
 x - interval(1, 2)
@@ -214,7 +214,7 @@ sqrt(3) * x # sqrt(3) in Float64
 ```
 
 However, it also catches operations involving integers, where it is
-much more common that the operation actually is rigorous
+much more common that the operation actually is rigorous.
 
 ``` @repl 1
 2x # OK!
@@ -270,7 +270,7 @@ For IntervalArithmetic.jl this is not needed.
 ## Automatic differentiation
 
 The IntervalArithmetic.jl package does not support computation of
-truncated Taylor series. Instead, computations of derivatives is done
+truncated Taylor series. Instead, computations of derivatives are done
 using more traditional automatic differentiation through the
 [ForwardDiff.jl](https://github.com/JuliaDiff/ForwardDiff.jl) package.
 

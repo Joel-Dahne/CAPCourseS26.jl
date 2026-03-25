@@ -43,7 +43,7 @@ Consider the problem of proving the existence of a zero on the
 interval ``[4, 5]`` for the function
 
 ``` math
-f(x) = 2\sin(x) + \sign(\cos(x / 3)) + 2.
+f(x) = 2\sin(x) + \operatorname{sign}(\cos(x / 3)) + 2.
 ```
 
 In general, to prove the existence of a zero on an interval it
@@ -110,7 +110,7 @@ overestimations in the enclosures can lead to more pessimistic
 decorations than necessary. For example, the function
 
 ``` math
-\sign(1 + x^2 - x^2)
+\operatorname{sign}(1 + x^2 - x^2)
 ```
 
 is clearly continuous everywhere (it is equal to 1). Computing an

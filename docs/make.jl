@@ -44,11 +44,11 @@ makedocs(
                 "week-9-lecture-1.md",
                 "week-9-lecture-2.md",
                 "week-9-lab.md",
+            ],
+            "Part 3: Computer-assisted proofs in practice" => [
                 "week-10-lecture-1.md",
                 "week-10-lecture-2.md",
                 "week-10-lab.md",
-            ],
-            "Part 3: Computer-assisted proofs in practice" => [
                 "week-11-lecture-1.md",
                 "week-11-lecture-2.md",
                 "week-11-lab.md",

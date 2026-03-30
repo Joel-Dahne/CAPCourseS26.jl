@@ -49,13 +49,13 @@ ys = f.(xs)
 
 # ╔═╡ 79d35504-f180-4594-ba3d-57f66e4eeabe
 colors = map(ys) do y
-	if in_interval(0, y)
-		:green
-	elseif inf(y) > 0
-		:red
-	else
-		:blue
-	end
+    if in_interval(0, y)
+        :green
+    elseif inf(y) > 0
+        :red
+    else
+        :blue
+    end
 end
 
 # ╔═╡ 4b36fddc-2a2e-4c46-8964-009639a47e1a
@@ -103,8 +103,8 @@ md"""
 
 # ╔═╡ 3748e410-db3a-46a6-9531-1bd317226c2b
 function N(x::Interval)
-	c = interval(mid(x))
-	return c - f(c) / df(x)
+    c = interval(mid(x))
+    return c - f(c) / df(x)
 end
 
 # ╔═╡ 1b5cb339-2821-4909-8395-eaa93c5d05ef
@@ -161,7 +161,7 @@ roots, flags = ArbExtras.isolate_roots(besselj0, Arf(0), Arf(2.5))
 
 # ╔═╡ f6f60935-357a-4d58-80b3-61103a47eb6c
 # Verify that there is exactly one root, this proves that it is
-    # the first one.
+# the first one.
 length(flags) == 1 && flags[1] || throw(ErrorException("could not isolate root"))
 
 # ╔═╡ 65217459-b3a4-413e-af99-59120080675c

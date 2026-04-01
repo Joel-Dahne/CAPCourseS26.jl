@@ -14,7 +14,7 @@ For this lecture, we will look at some categories of papers and
 methods and discuss which of them we are interested in diving deeper
 into.
 
-!!! notes "Remark"
+!!! note "Remark"
     Most of the papers discussed below are either my own or a
     selection of papers that I'm somewhat familiar with.
 

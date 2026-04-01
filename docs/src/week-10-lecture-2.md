@@ -169,10 +169,6 @@ To apply this method we need to discuss two things:
 2. How to compute ``G`` (and its derivatives) using interval
    arithmetic.
 
-The evaluation of ``G`` naturally splits into the evaluation of
-``Q_0`` and the evaluation of ``Q_\infty``, so we will consider them
-separately.
-
 ## Isolating roots in ``\mathbb{R}^d``
 
 For proving the existence (and local uniqueness) of a zero of ``G`` we
@@ -315,6 +311,35 @@ theorem.
     component of ``f``. The ``c_i`` points come from each of these
     instances of applying the theorem.
 
-## Evaluating ``Q_0``
+## Evaluating ``G``
 
-## Evaluating ``Q_\infty``
+Recall that ``G`` was given by
+
+``` math
+G(\mu, \gamma, \kappa) = \left(
+  Q_{0}(\mu, \kappa; \xi_{1}) - Q_{\infty}(\gamma, \kappa; \xi_{1}),
+  Q_{0}'(\mu, \kappa; \xi_{1}) - Q_{\infty}'(\gamma, \kappa; \xi_{1})
+\right)
+```
+
+To apply the interval Newton method to ``G`` we need to be able to
+compute interval enclosures of both ``G`` as well as its Jacobian.
+This means we need to be able to compute enclosures of
+
+- ``Q_{0}(\mu, \kappa; \xi_{1})``
+- ``Q_{0}'(\mu, \kappa; \xi_{1})``
+- ``\partial_\mu Q_{0}(\mu, \kappa; \xi_{1})``
+- ``\partial_\mu Q_{0}'(\mu, \kappa; \xi_{1})``
+- ``\partial_\kappa Q_{0}(\mu, \kappa; \xi_{1})``
+- ``\partial_\kappa Q_{0}'(\mu, \kappa; \xi_{1})``
+
+as well as
+
+- ``Q_{\infty}(\gamma, \kappa; \xi_{1})``
+- ``Q_{\infty}'(\gamma, \kappa; \xi_{1})``
+- ``\partial_\gamma Q_{\infty}(\gamma, \kappa; \xi_{1})``
+- ``\partial_\gamma Q_{\infty}'(\gamma, \kappa; \xi_{1})``
+- ``\partial_\kappa Q_{\infty}(\gamma, \kappa; \xi_{1})``
+- ``\partial_\kappa Q_{\infty}'(\gamma, \kappa; \xi_{1})``
+
+We will look closer at how to do this during the next lab.

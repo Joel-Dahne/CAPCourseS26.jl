@@ -3,7 +3,7 @@
 In this lecture we will take a look at the paper [Self-Similar
 Singular Solutions to the Nonlinear Schrödinger and the Complex
 Ginzburg-Landau Equations](https://arxiv.org/abs/2410.05480). The
-focus will be on the proof and the computer-assisted approach, we will
+focus will be on the proof and the computer-assisted approach; we will
 only briefly discuss the history of the problem.
 
 ## Background
@@ -16,13 +16,13 @@ i \frac{\partial u}{\partial t} + (1 - i\epsilon)\Delta u + (1 + i\delta)|u|^{2\
 \text{ in }\mathbb{R}^{d} \times (0, T),
 ```
 
-for parameters non-negative parameters ``\epsilon``, ``\delta`` and
+for non-negative parameters ``\epsilon``, ``\delta`` and
 ``\sigma``. For ``\epsilon = 0`` and ``\delta = 0`` it reduces to the
 more well known nonlinear Schrödinger (NLS) equation. In particular,
 for ``\sigma = 1`` we get the cubic NLS equation
 
 ``` math
-i \frac{\partial u}{\partial t} + \Delta u + |u|^{2}u.
+i \frac{\partial u}{\partial t} + \Delta u + |u|^{2}u = 0.
 ```
 
 The parameters considered in the paper are ``\delta = 0`` and
@@ -96,15 +96,15 @@ problem
   (1 - i\epsilon)\left(Q_{0}'' + \frac{d - 1}{\xi}Q_{0}'\right) + i\kappa\xi Q_{0}'
   + i \frac{\kappa}{\sigma}Q_{0} - \omega Q_{0} + (1 + i\delta)|Q_{0}|^{2\sigma}Q_{0}
   &= 0,\\
-  Q_{0}(0) = \mu,\\
-  Q_{0}'(0) = 0.
+  Q_{0}(0) &= \mu,\\
+  Q_{0}'(0) &= 0.
 \end{split}
 ```
 
 Here ``\mu`` is a parameter that we are free to vary, any value of
 ``\mu`` will give us a solution satisfying the right boundary
 condition at zero. For symmetry reasons we can take ``\mu`` to be real
-and positive. If we also include the solutions dependence on
+and positive. If we also include the solution's dependence on
 ``\kappa``, this gives us a two-parameter family of solutions. We will
 use the notation ``Q_0(\xi) = Q_0(\mu, \kappa; \xi)`` to explicitly
 denote this dependence.
@@ -115,13 +115,13 @@ The solution ``Q_\infty`` is determined by the condition ``Q(\xi)
 parametrize the solution. We will see later that there is a
 one-dimensional complex manifold of solutions satisfying this
 condition. We will parametrize this manifold by ``\gamma \in
-\mathbb{C}``, which together with the solutions dependence on
+\mathbb{C}``, which together with the solution's dependence on
 ``\kappa`` gives us ``Q_\infty(\xi) = Q_\infty(\gamma, \kappa; \xi)``.
 
 Note that by construction, the solution ``Q_0`` satisfies the required
 boundary condition at zero and the solution ``Q_\infty`` satisfy the
 boundary condition at infinity. In general, neither ``Q_0`` nor
-``Q_\infty`` will however satisfy both boundary conditions. Our goal
+``Q_\infty`` will, however, satisfy both boundary conditions. Our goal
 is to find parameters ``(\mu, \gamma, \kappa)`` so that these
 solutions can be glued together at some intermediate point ``\xi_1``.
 They would then form a global solution satisfying both boundary
@@ -130,8 +130,8 @@ need is that they satisfy
 
 ``` math
 \begin{cases}
-  Q_0(\mu, \kappa; \xi_1) = Q_\infty(\gamma, \kappa; \xi_1) &= 0,\\
-  Q_0'(\mu, \kappa; \xi_1) = Q_\infty'(\gamma, \kappa; \xi_1) &= 0.
+  Q_0(\mu, \kappa; \xi_1) &= Q_\infty(\gamma, \kappa; \xi_1),\\
+  Q_0'(\mu, \kappa; \xi_1) &= Q_\infty'(\gamma, \kappa; \xi_1).
 \end{cases}
 ```
 
@@ -192,15 +192,15 @@ that if ``N(\bm{x}) \subseteq \bm{x}``, then the function ``f`` has a
 unique root on the interval ``\bm{x}``.
 
 The generalization of the interval Newton method to higher dimensions
-only requires changing the derivative to the Jacobian. Of ``Df``
+only requires changing the derivative to the Jacobian. If ``Df``
 denotes the Jacobian of ``f``, then the higher dimensional version of
 the Newton operator is
 
 ``` math
-N(\bm{x}) = m - Df(\bm{x})^{-1}f(m).
+N(\bm{x}) = m - Df(\bm{x})^{-1}f(m),
 ```
 
-Where ``\bm{x} = \bm{x}_1 \times \cdot \times \bm{x}_d`` is a box
+where ``\bm{x} = \bm{x}_1 \times \cdots \times \bm{x}_d`` is a box
 given by a Cartesian product of intervals and ``m`` is (usually) the
 midpoint of this box. We then have the following result.
 
@@ -277,7 +277,7 @@ theorem.
 !!! note "Proof"
     Suppose we have two roots, ``x_0`` and ``x_1``, and consider the line
     segment joining them. The proof is based on a multivariable version of
-    the mean value theorem. Namely that
+    the mean value theorem, namely that
 
     ``` math
     f(x_0) - f(x_1) = J (x_1 - x_0)

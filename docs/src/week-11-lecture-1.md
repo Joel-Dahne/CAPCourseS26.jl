@@ -56,7 +56,7 @@ look at `Q_infty` and `Q_infty_jacobian`.
 
 ## Splitting into real and imaginary parts
 
-Recall that `Q_0` is the (unique) solution to the initial value
+Recall that ``Q_0`` is the (unique) solution to the initial value
 problem
 
 ``` math
@@ -102,7 +102,9 @@ using the [Frobenius
 method](https://en.wikipedia.org/wiki/Frobenius_method). However, for
 our purposes we will just make the ansatz that ``a`` and ``b`` are
 given by the Taylor expansions ``a = \sum_{n = 0}^{\infty}
-a_{n}\xi^{n}`` and ``b = \sum_{n = 0}^{\infty} b_{n}\xi^{n}``.
+a_{n}\xi^{n}`` and ``b = \sum_{n = 0}^{\infty} b_{n}\xi^{n}``. By
+inserting this ansatz into the equation and solving for the
+coefficients one gets
 
 ``` math
 a_{n + 2} = \frac{F_{1,n} - \epsilon F_{2,n}}{(n + 2)(n + d)(1 + \epsilon^{2})},\quad

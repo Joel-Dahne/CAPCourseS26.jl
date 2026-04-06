@@ -49,6 +49,7 @@ md"""
 
 # ╔═╡ 2ef6499b-4010-47df-a397-d668e39616f2
 function Q_zero(μ::Arb, κ::Arb, ξ₁::Arb)
+	# FIXME: Implement this
     zero(SVector{2,Acb})
 end
 
@@ -57,8 +58,12 @@ Q_zero(μ_0, κ_0, ξ₁)
 
 # ╔═╡ b664b7af-a374-4aea-8854-25b3f725521b
 function Q_zero_jacobian(μ::Arb, κ::Arb, ξ₁::Arb)
+	# FIXME: Implement this
     return zero(SMatrix{2,2,Acb})
 end
+
+# ╔═╡ 8ce3188a-9f33-4ed6-909c-a0b5a39d2410
+Q_zero_jacobian(μ_0, κ_0, ξ₁)
 
 # ╔═╡ 18eed5da-afee-4fa4-9032-45613ceddfd7
 md"""
@@ -67,6 +72,7 @@ md"""
 
 # ╔═╡ 04836b5a-e161-4d24-bdb8-e1f5d8f9b96b
 function Q_infty(γ::Acb, κ::Arb, ξ₁::Arb)
+	# FIXME: Implement this
     return zero(SVector{2,Acb})
 end
 
@@ -75,8 +81,12 @@ Q_infty(γ_0, κ_0, ξ₁)
 
 # ╔═╡ 13aa1b0d-cb5a-404d-b8ad-20ac4301b173
 function Q_infty_jacobian(γ::Acb, κ::Arb, ξ₁::Arb)
+	# FIXME: Implement this
     return zero(SMatrix{2,2,Acb})
 end
+
+# ╔═╡ 6066ed44-7ce4-4f69-b47c-26e69bc74be8
+Q_infty_jacobian(γ_0, κ_0, ξ₁)
 
 # ╔═╡ 8c9d600a-f1e5-492d-8dc7-a3b017803503
 md"""
@@ -138,17 +148,11 @@ function interval_newton_step(x::SVector{4,Arb})
     return m - SVector{4}(ArbMatrix(DGx) \ ArbMatrix(Gm))
 end
 
-# ╔═╡ 1185bbe5-c4fd-4a7f-8243-4f0cff18b404
-μ = add_error(μ_0, Mag(1e-6))
+# ╔═╡ f2dcb42f-4826-46be-bc34-f70031469a68
+x_0 = SVector(μ_0, real(γ_0), imag(γ_0), κ_0)
 
-# ╔═╡ c0e0cff0-9373-4ad2-8d0e-27a8d24c3d0f
-γ = add_error(γ_0, Mag(1e-6))
-
-# ╔═╡ 0a691ac1-5d88-4d00-baf0-aa8727f2633b
-κ = add_error(μ_0, Mag(1e-6))
-
-# ╔═╡ 9d0d1fa9-fe8a-4765-afa8-b8290d19debf
-x = SVector(μ, real(γ), imag(γ), κ)
+# ╔═╡ e97c5b70-cad9-4892-bdc7-235c26a2bd67
+x = add_error.(x_0, Mag(1e-6))
 
 # ╔═╡ 48e9afb4-671d-4734-9aef-d254e88e8fd7
 Nx = interval_newton_step(x)
@@ -2130,10 +2134,12 @@ version = "1.13.0+0"
 # ╠═2ef6499b-4010-47df-a397-d668e39616f2
 # ╠═4f4c61ab-69bf-42ed-bad9-2a09b43e7e1a
 # ╠═b664b7af-a374-4aea-8854-25b3f725521b
+# ╠═8ce3188a-9f33-4ed6-909c-a0b5a39d2410
 # ╟─18eed5da-afee-4fa4-9032-45613ceddfd7
 # ╠═04836b5a-e161-4d24-bdb8-e1f5d8f9b96b
 # ╠═f225fdb3-db78-45b6-a152-6e29a7b777d7
 # ╠═13aa1b0d-cb5a-404d-b8ad-20ac4301b173
+# ╠═6066ed44-7ce4-4f69-b47c-26e69bc74be8
 # ╟─8c9d600a-f1e5-492d-8dc7-a3b017803503
 # ╠═1d4f3c28-0e10-4c1d-9efb-36f6e6014600
 # ╠═8accbcc0-3b37-47cd-a3f7-db29ce0f6fcb
@@ -2141,10 +2147,8 @@ version = "1.13.0+0"
 # ╠═79d3c351-677b-42e9-a155-93a1253c1300
 # ╟─3bbff377-e805-478e-9dd4-578a9e002fc4
 # ╠═66dbee77-5060-4f41-830f-29ec3be7ed85
-# ╠═1185bbe5-c4fd-4a7f-8243-4f0cff18b404
-# ╠═c0e0cff0-9373-4ad2-8d0e-27a8d24c3d0f
-# ╠═0a691ac1-5d88-4d00-baf0-aa8727f2633b
-# ╠═9d0d1fa9-fe8a-4765-afa8-b8290d19debf
+# ╠═f2dcb42f-4826-46be-bc34-f70031469a68
+# ╠═e97c5b70-cad9-4892-bdc7-235c26a2bd67
 # ╠═48e9afb4-671d-4734-9aef-d254e88e8fd7
 # ╠═f696af79-e2cd-4b44-bba9-564b42f30549
 # ╠═38909db4-57e0-42a9-9660-129bcd09abc5

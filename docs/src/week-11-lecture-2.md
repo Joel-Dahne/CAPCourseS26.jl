@@ -60,7 +60,7 @@ linear combinations of these two.
 
 To understand the asymptotic behavior of ``Q_\infty`` we will have to
 understand the asymptotic behavior of ``U`` and ``V``. From the
-asymptotic expansion of ``U`` one get the asymptotic behavior
+asymptotic expansion of ``U`` one gets the asymptotic behavior
 
 ``` math
 U(a, b, z) \approx z^{-a}.
@@ -138,7 +138,7 @@ side in a non-homogeneous equation. Making the ansatz
 Q_\infty(\xi) = c_1(\xi)P(\xi) + c_2(\xi)E(\xi)
 ```
 
-one get that ``c_1`` and ``c_2`` should satisfy
+one gets that ``c_1`` and ``c_2`` should satisfy
 
 ``` math
 c_1' = -(1 + i\delta)|Q_\infty(\xi)|^{2\sigma}Q_\infty(\xi) \frac{E(\xi)}{(1 - i\epsilon)W(\xi)}
@@ -161,8 +161,8 @@ to use the representations
 
 ``` math
 \begin{align*}
-  c_1(\xi) &= \gamma + \int_{\xi_1}^\infty J_E(\eta)|Q_\infty(\eta)|^{2\sigma}Q_\infty(\eta)\, d\eta,\\
-  c_2(\xi) &= \int_{\xi}^\infty J_E(\eta)|Q_\infty(\eta)|^{2\sigma}Q_\infty(\eta)\, d\eta.
+  c_1(\xi) &= \gamma + \int_{\xi_1}^\xi J_E(\eta)|Q_\infty(\eta)|^{2\sigma}Q_\infty(\eta)\, d\eta,\\
+  c_2(\xi) &= \int_{\xi}^\infty J_P(\eta)|Q_\infty(\eta)|^{2\sigma}Q_\infty(\eta)\, d\eta.
 \end{align*}
 ```
 
@@ -215,7 +215,7 @@ explicit bounds for the remainder term, see
 The same expansion is used in Flint for the evaluation of ``U``.
 
 To get bounds for ``I_P`` and ``I_E`` we first need to decide on in
-which space we are search for a fixed point. Since we expect the
+which space we are searching for a fixed point. Since we expect the
 asymptotic behavior of ``Q_\infty`` to be determined by ``P``, which
 decays as ``\xi^{-\frac{1}{\sigma}}``, and we are working on the
 interval ``[\xi_1, \infty)`` it would be natural to use the norm
@@ -318,7 +318,7 @@ From this it is straightforward to prove the following bound for ``T``.
     \|T(u) - T(v)\|_v \leq M_\sigma C_T \|u - v\|_v (\|u\|_v^{2\sigma} + \|v\|_v^{2\sigma}),
     ```
 
-    with ``C_T = (C_PC_{I_E} + C_EC_{I_{}})`` and a constant ``M_\sigma``
+    with ``C_T = C_PC_{I_E} + C_EC_{I_P}`` and a constant ``M_\sigma``
     depending only on ``\sigma``.
 
 This gives us all the ingredients to set up a fixed point problem. The
@@ -357,7 +357,7 @@ Q_\infty(\xi_1) = \gamma P(\xi_1) + E(\xi_1)I_P(\xi_1).
 ```
 
 We can compute enclosures of ``P`` and ``E`` using the implementation
-of ``U`` in Flint. For ``I_P`` we can combined the above lemma with
+of ``U`` in Flint. For ``I_P`` we can combine the above lemma with
 the bound for ``\|Q_\infty\|_v`` to get a bound for ``|I_P(\xi_1)|``.
 
 With the above approach we get a somewhat decent enclosure of

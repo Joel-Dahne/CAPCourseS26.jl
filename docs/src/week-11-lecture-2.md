@@ -141,18 +141,18 @@ Q_\infty(\xi) = c_1(\xi)P(\xi) + c_2(\xi)E(\xi)
 one gets that ``c_1`` and ``c_2`` should satisfy
 
 ``` math
-c_1' = -(1 + i\delta)|Q_\infty(\xi)|^{2\sigma}Q_\infty(\xi) \frac{E(\xi)}{(1 - i\epsilon)W(\xi)}
+c_1' = (1 + i\delta)|Q_\infty(\xi)|^{2\sigma}Q_\infty(\xi) \frac{E(\xi)}{(1 - i\epsilon)W(\xi)}
 \text{ and }
-c_2' = (1 + i\delta)|Q_\infty(\xi)|^{2\sigma}Q_\infty(\xi) \frac{P(\xi)}{(1 - i\epsilon)W(\xi)},
+c_2' = -(1 + i\delta)|Q_\infty(\xi)|^{2\sigma}Q_\infty(\xi) \frac{P(\xi)}{(1 - i\epsilon)W(\xi)},
 ```
 
 where ``W`` is the Wronskian associated with ``P`` and ``E``. To
 simplify the notation we let
 
 ``` math
-J_E(\xi) = -(1 + i\delta)\frac{E(\xi)}{(1 - i\epsilon)W(\xi)}
+J_E(\xi) = (1 + i\delta)\frac{E(\xi)}{(1 - i\epsilon)W(\xi)}
 \text{ and }
-J_P(\xi) = -(1 + i\delta)\frac{P(\xi)}{(1 - i\epsilon)W(\xi)}.
+J_P(\xi) = (1 + i\delta)\frac{P(\xi)}{(1 - i\epsilon)W(\xi)}.
 ```
 
 To satisfy the boundary conditions we want ``c_1`` to have a non-zero

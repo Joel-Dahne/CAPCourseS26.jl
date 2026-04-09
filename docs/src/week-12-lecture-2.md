@@ -45,7 +45,9 @@ An abstract version of such a constructive theorem for general Banach
 spaces is given in the paper [Validated Saddle-Node Bifurcations and
 Applications to Lattice Dynamical
 Systems](https://doi.org/10.1137/16M1061011) by Evelyn Sander and
-Thomas Wanner. Read through Section 2.1 of that paper. Some remarks:
+Thomas Wanner (the paper is also available
+[here](https://esander1789.github.io/files/SW16.pdf)). Read through
+Section 2.1 of that paper. Some remarks:
 
 - The theorem is stated in terms of general Banach spaces. For the
   course we have so far stayed in finite dimensional spaces, but some

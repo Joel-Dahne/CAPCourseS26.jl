@@ -8,6 +8,7 @@ and the Complex Ginzburg-Landau
 Equations](https://arxiv.org/abs/2410.05480), might be useful as a
 reference in some cases.
 
-The general setup is similar to the Week 10 lab. However, in this case
-a lot more details are already filled out and you task will be to fill
-in some of the details.
+The instructions are given in the `lab-11.jl` notebook. The general
+setup is similar to the Week 10 lab. However, in this case a lot more
+details are already filled out and you task will be to fill in some of
+the details.

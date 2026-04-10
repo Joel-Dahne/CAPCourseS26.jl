@@ -93,31 +93,37 @@ function Q_zero_taylor(μ::Arb, κ::Arb, ξ₀::Arb; N = 20)
     a = ArbSeries(μ, degree = N)
     b = ArbSeries(0, degree = N)
 
+    # TASK: Implement recurrence relationship
     for n = 0:(N-2)
-        u₁ = ((a^2+b^2)*a)[n]
-        u₂ = ((a^2+b^2)*b)[n]
+        u₁ = 0
+        u₂ = 0
 
-        F₁ = κ * n * b[n] + κ * b[n] + a[n] - u₁
-        F₂ = -κ * n * a[n] - κ * a[n] + b[n] - u₂
+        F₁ = 0
+        F₂ = 0
 
-        a[n+2] = F₁ / ((n + 2) * (n + 3))
-        b[n+2] = F₂ / ((n + 2) * (n + 3))
+        a[n+2] = 0
+        b[n+2] = 0
     end
 
+    # Pick parameters to be used for remainder term
     r = 1 / 16ξ₀
     M = let M = findlast(n -> !(abs(a[n]) <= r^n && abs(b[n]) <= r^n), 0:N)
         isnothing(M) ? 0 : M
     end
     C = 1.01max(maximum(n -> abs(a[n] / r^n), 0:N), maximum(n -> abs(b[n] / r^n), 0:N))
 
-    @assert 3M < N
-    @assert all(n -> abs(a[n]) <= C * r^n, 0:(M-1))
-    @assert all(n -> abs(a[n]) <= r^n, M:N)
-    @assert all(n -> abs(b[n]) <= C * r^n, 0:(M-1))
-    @assert all(n -> abs(b[n]) <= r^n, M:N)
+    # TASK: Assert that the conditions from the lemma hold
+    @assert true
 
-    remainder_bound = (r * ξ₀)^(N + 1) / (1 - r * ξ₀)
-    remainder_dξ_bound = (r * ξ₀)^N * (N + 1 - N * r * ξ₀) / (1 - r * ξ₀)^2
+    for n = 0:N
+        @assert true
+    end
+
+    @assert Arb(0) <= r^2
+
+    # TASK: Implement the remainder terms
+    remainder_bound = Arb(0)
+    remainder_dξ_bound = Arb(0)
 
     a₀, a₁ = Arblib.evaluate2(a, ξ₀)
     b₀, b₁ = Arblib.evaluate2(b, ξ₀)
@@ -169,7 +175,7 @@ end
 
 # ╔═╡ 2ef6499b-4010-47df-a397-d668e39616f2
 function Q_zero(μ::Arb, κ::Arb, ξ₁::Arb)
-    ξ₀ = Arb(0.001)
+    ξ₀ = Arb(0.01)
 
     Q_ξ₀ = Q_zero_taylor(μ, κ, ξ₀)
 
@@ -420,10 +426,11 @@ Next we implement ``P`` and ``E``. Here it is your task to fill out some of the 
 
 # ╔═╡ 14334564-c126-45a7-ac7d-52538ed07a77
 function P(κ, ξ)
-    a = (1 + im / κ) / 2
-    b = Acb(3 // 2)
-    c = -im * κ / 2
-    z = c * ξ^2
+    # TASK: Implement this
+    a = Acb(0)
+    b = Acb(0)
+    c = Acb(0)
+    z = Acb(0)
     return U(a, b, z)
 end
 
@@ -434,11 +441,12 @@ function P_dξ(κ, ξ)
     # However, that doesn't work for κ::ArbSeries. We hence
     # give a manual implementation.
 
-    a = (1 + im / κ) / 2
-    b = Acb(3 // 2)
-    c = -im * κ / 2
-    z = c * ξ^2
-    z_dξ = 2c * ξ
+    # TASK: Implement this
+    a = Acb(0)
+    b = Acb(0)
+    c = Acb(0)
+    z = Acb(0)
+    z_dξ = Acb(0)
     return z_dξ * U_dz(a, b, z)
 end
 
@@ -466,10 +474,11 @@ P_dξ_dκ(κ_0, ξ₁)
 
 # ╔═╡ 5d4da87c-eed0-4022-ab75-78918d04a720
 function E(κ, ξ)
-    a = (1 + im / κ) / 2
-    b = Acb(3 // 2)
-    c = -im * κ / 2
-    z = c * ξ^2
+    # TASK: Implement this
+    a = Acb(0)
+    b = Acb(0)
+    c = Acb(0)
+    z = Acb(0)
     return exp(z) * U(b - a, b, -z)
 end
 
@@ -480,11 +489,12 @@ function E_dξ(κ, ξ)
     # However, that doesn't work for κ::ArbSeries. We hence
     # give a manual implementation.
 
-    a = (1 + im / κ) / 2
-    b = Acb(3 // 2)
-    c = -im * κ / 2
-    z = c * ξ^2
-    z_dξ = 2c * ξ
+    # TASK: Implement this
+    a = Acb(0)
+    b = Acb(0)
+    c = Acb(0)
+    z = Acb(0)
+    z_dξ = Acb(0)
     return z_dξ * exp(z) * (U(b - a, b, -z) - U_dz(b - a, b, -z))
 end
 
@@ -511,7 +521,8 @@ function Q_infty(γ::Acb, κ::Arb, ξ₁::Arb)
     I_E_dξ = zero(ξ₁) # FIXME: This should not be zero!
     I_P_dξ = zero(ξ₁) # FIXME: This should not be zero!
 
-    Q = γ * P(κ, ξ₁) + P(κ, ξ₁) * I_E + E(κ, ξ₁) * I_P
+    # TASK: Implement this
+    Q = Acb(0)
 
     Q_dξ =
         γ * P_dξ(κ, ξ₁) +
@@ -2746,6 +2757,6 @@ version = "1.13.0+0"
 # ╠═e97c5b70-cad9-4892-bdc7-235c26a2bd67
 # ╠═48e9afb4-671d-4734-9aef-d254e88e8fd7
 # ╠═f696af79-e2cd-4b44-bba9-564b42f30549
-# ╠═38909db4-57e0-42a9-9660-129bcd09abc5
+# ╟─38909db4-57e0-42a9-9660-129bcd09abc5
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

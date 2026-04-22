@@ -65,7 +65,7 @@ for some ``\nu > 0``. Given an approximate fixed point
 \begin{align}
   \|T(\overline{c}) - \overline{c}\| &\leq Y,\\
   \|DT(\overline{c})\|_{\ell_\nu^1 \to \ell_\nu^1} &\leq Z_{1},\\
-  \sup_{c \in \text{cl}(B_R(\overline{c}))} \|D^2T(c)\|_{\ell_\nu^1 \times \ell_\nu^1 \to \ell_\nu^1} \leq Z_{2}.
+  \sup_{c \in \text{cl}(B_R(\overline{c}))} \|D^2T(c)\|_{\ell_\nu^1 \times \ell_\nu^1 \to \ell_\nu^1} &\leq Z_{2}.
 \end{align}
 ```
 
@@ -103,13 +103,10 @@ operator to ``\mathbb{R}^{N + 1}``, since the output only has ``N +
 abuse of notation switch between these two points of view when it is
 convenient.
 
-!!! note "Remark"
-    If one wants to make some of the statements below slightly more formal
-    it is also convenient to consider the inclusion operator ``i_N :
-    \mathbb{R}^{N + 1} \to \ell_\nu^1``, which takes a finite sequence and
-    embeds it in ``\ell_\nu^1`` (padding it with zeros). In the
-    presentation below this inclusion will however most of the time be
-    implicit.
+When treating ``\Pi_N`` as an operator to ``\mathbb{R}^{N + 1}`` it is
+also convenient to consider the inclusion operator ``i_N :
+\mathbb{R}^{N + 1} \to \ell_\nu^1``, which takes a finite sequence and
+embeds it in ``\ell_\nu^1`` (padding it with zeros).
 
 ## Finding an approximate solution
 
@@ -168,9 +165,11 @@ From
 we get
 
 ``` math
-(F(c + h))_n
-= n(c_n + h_n) - c_{n - 1} - h_{n - 1} + (c \ast c)_{n - 1} + 2(c \ast h)_{n - 1} + (h \ast h)_{n - 1}
-= (F(c))_n + nh_n - h_{n - 1} + 2(c \ast h)_{n - 1} + o(\|h\|_\nu).
+\begin{split}
+  (F(c + h))_n
+  &= n(c_n + h_n) - c_{n - 1} - h_{n - 1} + (c \ast c)_{n - 1} + 2(c \ast h)_{n - 1} + (h \ast h)_{n - 1}\\
+  &= (F(c))_n + nh_n - h_{n - 1} + 2(c \ast h)_{n - 1} + o(\|h\|_\nu).
+\end{split}
 ```
 
 Combined with ``(F(c + h))_0 = F(c)_0 + h_0`` this gives us
@@ -184,8 +183,8 @@ Combined with ``(F(c + h))_0 = F(c)_0 + h_0`` this gives us
 ```
 
 If we represent ``DF(c)`` as an infinite dimensional matrix, then
-``h_0`` and ``nh_n`` correspond to the diagonal part. This diagonal
-part is given by the operator ``\Lambda``, defined by
+``h_0`` and ``nh_n`` correspond to the diagonal part. We denote this
+diagonal part by the operator ``\Lambda``, defined by
 
 ``` math
 (\Lambda h)_n =
@@ -249,14 +248,14 @@ A = i_N A_N \Pi_N + \Lambda^{-1} \Pi_{> N}.
 Note that ``i_N A_N \Pi_N`` only acts on the subspace of
 ``\ell_\nu^1`` given by indices up to ``N`` and that ``\Lambda^{-1}
 \Pi_{> N}`` only acts on the subspace given by indices larger than
-``N``. The linear operator ``A`` is hence block diagonal, and
+``N``. The linear operator ``A`` is hence block diagonal, and can be
 represented as
 
 ``` math
-A = \begin{pmatrix} A_N & 0 \\ 0 & \Lambda^{-1} \end{pmatrix}
+A = \begin{pmatrix} A_N & 0 \\ 0 & \Lambda^{-1} \end{pmatrix}.
 ```
 
-Note that for the finite part ``i_N A_N \Pi_N`` we don't have any
+Note that for the finite part, ``i_N A_N \Pi_N``, we don't have any
 direct control in terms of pen-and-paper estimates. The coefficients
 are determined numerically and we need to use the computer to compute
 bounds. For the tail, ``\Lambda^{-1} \Pi_{> N}``, we have a good
@@ -304,7 +303,7 @@ i_N A_N \Pi_N F(\overline{c})
 is a finite sequence, which can be directly computed using interval
 arithmetic. This allows us to compute a bound.
 
-For the second term we note that this is in fact also a finite
+For the second term we note that this is, in fact, also a finite
 sequence. This is a consequence of ``F(\overline{c})`` having non-zero
 values up to at most index ``2N`` due to the quadratic non-linearity.
 We can therefore again compute this sequence using interval arithmetic
@@ -318,33 +317,33 @@ The next step is to bound ``Z_1``. We have
 DT(\overline{c}) = I - ADF(\overline{c}).
 ```
 
-From ``DF(\overline{c}) = \Lambda + L_\overline{c}`` and the
+From ``DF(\overline{c}) = \Lambda + L_{\overline{c}}`` and the
 definition of ``A`` we get
 
 ``` math
-ADF(\overline{c}) = A(\Lambda + L_\overline{c})
-= i_N A_N \Pi_N (\Lambda + L_\overline{c}) + \Lambda^{-1} \Pi_{> N} (\Lambda + L_\overline{c}).
+ADF(\overline{c}) = A(\Lambda + L_{\overline{c}})
+= i_N A_N \Pi_N (\Lambda + L_{\overline{c}}) + \Lambda^{-1} \Pi_{> N} (\Lambda + L_{\overline{c}}).
 ```
 
 Note that similar to ``A``, this operator is block diagonal. The term
-``i_N A_N \Pi_N (\Lambda + L_\overline{c})`` acts purely on the
+``i_N A_N \Pi_N (\Lambda + L_{\overline{c}})`` acts purely on the
 subspace with indices up to ``N`` and ``\Lambda^{-1} \Pi_{> N}
-(\Lambda + L_\overline{c})`` acts purely on the subspace with indices
+(\Lambda + L_{\overline{c}})`` acts purely on the subspace with indices
 larger than ``N``. It is then a general result that the norm is given
 by the maximum of the two norms, namely
 
 ``` math
 \|DT(\overline{c})\|_{\ell_\nu^1 \to \ell_\nu^1}
 = \max\left(
-\left\|\Pi_N - i_N A_N \Pi_N (\Lambda + L_\overline{c})\right\|_{\ell_\nu^1 \to \ell_\nu^1}
-\left\|\Pi_{>N} - \Lambda^{-1} \Pi_{> N} (\Lambda + L_\overline{c})\right\|_{\ell_\nu^1 \to \ell_\nu^1}
+\left\|\Pi_N - i_N A_N \Pi_N (\Lambda + L_{\overline{c}})\right\|_{\ell_\nu^1 \to \ell_\nu^1}
+\left\|\Pi_{>N} - \Lambda^{-1} \Pi_{> N} (\Lambda + L_{\overline{c}})\right\|_{\ell_\nu^1 \to \ell_\nu^1}
 \right).
 ```
 
 To compute a bound for the first term we use that
 
 ``` math
-\Pi_N - i_N A_N \Pi_N (\Lambda + L_\overline{c})
+\Pi_N - i_N A_N \Pi_N (\Lambda + L_{\overline{c}})
 ```
 
 corresponds to a finite ``(N + 1) \times (N + 1)`` matrix. We can
@@ -359,15 +358,15 @@ For the second term we note that
 This gives us
 
 ``` math
-\Pi_{>N} - \Lambda^{-1} \Pi_{> N} (\Lambda + L_\overline{c}) = -\Lambda^{-1} \Pi_{>N} L_\overline{c}.
+\Pi_{>N} - \Lambda^{-1} \Pi_{> N} (\Lambda + L_{\overline{c}}) = -\Lambda^{-1} \Pi_{>N} L_{\overline{c}}.
 ```
 
 We can bound this as
 
 ``` math
-\left\|-\Lambda^{-1} \Pi_{>N} L_\overline{c}\right\|_{\ell_\nu^1 \to \ell_\nu^1}
+\left\|-\Lambda^{-1} \Pi_{>N} L_{\overline{c}}\right\|_{\ell_\nu^1 \to \ell_\nu^1}
 \leq \left\|\Lambda^{-1} \Pi_{>N}\right\|_{\ell_\nu^1 \to \ell_\nu^1}
-\left\|L_\overline{c}\right\|_{\ell_\nu^1 \to \ell_\nu^1}.
+\left\|L_{\overline{c}}\right\|_{\ell_\nu^1 \to \ell_\nu^1}.
 ```
 
 The first factor is bounded by ``\frac{1}{N + 1}``. To bound the
@@ -387,13 +386,13 @@ The norm for the operator corresponding to multiplication by ``2\overline{c} -
 Hence
 
 ``` math
-\left\|L_\overline{c}\right\|_{\ell_\nu^1 \to \ell_\nu^1} \leq \nu\|2\overline{c} - 1\|_{\nu}.
+\left\|L_{\overline{c}}\right\|_{\ell_\nu^1 \to \ell_\nu^1} \leq \nu\|2\overline{c} - 1\|_{\nu}.
 ```
 
 We conclude that
 
 ``` math
-\left\|\Pi_{>N} - \Lambda^{-1} \Pi_{> N} (\Lambda + L_\overline{c})\right\|_{\ell_\nu^1 \to \ell_\nu^1}
+\left\|\Pi_{>N} - \Lambda^{-1} \Pi_{> N} (\Lambda + L_{\overline{c}})\right\|_{\ell_\nu^1 \to \ell_\nu^1}
 \leq \frac{\nu}{N + 1}\|2\overline{c} - 1\|_{\nu}.
 ```
 
@@ -414,6 +413,10 @@ and hence
 \|D^2T(\overline{c})\|_{\ell_\nu^1 \times \ell_\nu^1 \to \ell_\nu^1}
 \leq \|A\|_{\ell_\nu^1 \to \ell_\nu^1} \|D^2F(\overline{c})\|_{\ell_\nu^1 \times \ell_\nu^1 \to \ell_\nu^1}.
 ```
+
+Note that since ``D^2F(\overline{c})`` is independent of
+``\overline{c}`` the supremum in the bound doesn't actually matter, we
+get a global bound for the operator.
 
 For ``A`` we have
 
@@ -446,3 +449,21 @@ norm of ``2\nu``. We conclude that
 \|D^2T(\overline{c})\|_{\ell_\nu^1 \times \ell_\nu^1 \to \ell_\nu^1}
 \leq 2\nu\max\left(\|i_N A_N \Pi_N\|_{\ell_\nu^1 \to \ell_\nu^1}, \frac{1}{N + 1}\right).
 ```
+
+## Other equations
+
+The computations above were specific for the equation we considered.
+The idea of splitting into a finite part and a tail does, however,
+hold in general. There are, however, a number of things that can make
+computing the bounds more complicated:
+
+1. If the non-linearity is not polynomial we don't get a finite tail
+   when bounding ``\|T(\overline{c}) - \overline{c}\|_\nu``. One then
+   has to do more estimates to get bounds for the decay rate.
+2. In general the operator ``D^2T(c)`` will not be independent of
+   ``c``. In this case one has to get bounds for how this behaves in a
+   neighbourhood of ``\overline{c}``.
+3. In this case the dominant part of ``DF(c)`` was diagonal and we
+   could hence take the tail of ``A`` to be diagonal as well. In
+   general this might not be the case and one would have to rely on
+   more sophisticated methods for bounding it.

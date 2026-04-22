@@ -2,7 +2,7 @@
 
 In the last lecture we looked at the radii polynomial approach for
 solving differential equations in sequence space. In this lecture we
-start where we left of last time, applying the approach to the
+start where we left off last time, applying the approach to the
 logistic equation.
 
 ## Where we left off
@@ -71,13 +71,13 @@ for some ``\nu > 0``. Given an approximate fixed point
 
 Define the radii polynomial ``p(r) = Y + (Z_1 - 1)r + \frac{Z_2}{2}
 r^2``. If we can find ``r \in [0, R]`` such that ``p(r) \leq 0`` and
-``Z_1 + Z_2 r < 1``, then ``T`` has a unique fixed point withing a
+``Z_1 + Z_2 r < 1``, then ``T`` has a unique fixed point within a
 distance ``r`` of the approximate fixed point ``\overline{c}``.
 
 ## Finite part + tail
 
 For many of the bounds we will split the operator ``T`` into one
-finite part, which is handled numerically, and one infinity tail which
+finite part, which is handled numerically, and one infinite tail which
 is bounded by hand.
 
 For this reason it is convenient to introduce the truncation operator
@@ -92,7 +92,7 @@ above ``N``. More precisely it is given by
 \end{cases}
 ```
 
-We will also make use of the complimentary operator, ``\Pi_{>N} = I -
+We will also make use of the complementary operator, ``\Pi_{>N} = I -
 \Pi_N``, which zeros out the coefficients up to ``N``. These two
 operators will often be used to split the problem into two parts.
 
@@ -100,7 +100,7 @@ Formally the operator ``\Pi_N`` goes from ``\ell_\nu^1`` to itself.
 However, in many cases it is natural to instead consider it as an
 operator to ``\mathbb{R}^{N + 1}``, since the output only has ``N +
 1`` non-zero elements. In the presentation below we will in a slight
-abuse of notation switch between these two point of views when it is
+abuse of notation switch between these two points of view when it is
 convenient.
 
 !!! note "Remark"
@@ -156,7 +156,7 @@ We need to understand how ``DF(c)`` acts on sequences ``h``. For ``n
 \geq 1`` we have
 
 ``` math
-(F(c + h))_n = n(c_n + h_n) - c_{n - 1} - h_{n - 1} + ((c + h) \ast (c _ h))_{n - 1}
+(F(c + h))_n = n(c_n + h_n) - c_{n - 1} - h_{n - 1} + ((c + h) \ast (c + h))_{n - 1}
 ```
 
 From
@@ -169,8 +169,8 @@ we get
 
 ``` math
 (F(c + h))_n
-= n(c_n + h_n) - c_{n - 1} - h_{n - 1} + (c \ast c)_{n - 1} + 2(c \ast h)_{n - 1} + (h \ast h)_{n = 1}
-= (F(c))_n + nh_n - h_{n - 1} + 2(c \ast h)_{n - 1} + o(\|h\|_\normv).
+= n(c_n + h_n) - c_{n - 1} - h_{n - 1} + (c \ast c)_{n - 1} + 2(c \ast h)_{n - 1} + (h \ast h)_{n - 1}
+= (F(c))_n + nh_n - h_{n - 1} + 2(c \ast h)_{n - 1} + o(\|h\|_\nu).
 ```
 
 Combined with ``(F(c + h))_0 = F(c)_0 + h_0`` this gives us
@@ -185,7 +185,7 @@ Combined with ``(F(c + h))_0 = F(c)_0 + h_0`` this gives us
 
 If we represent ``DF(c)`` as an infinite dimensional matrix, then
 ``h_0`` and ``nh_n`` correspond to the diagonal part. This diagonal
-part by is given by the operator ``\Lambda``, defined by
+part is given by the operator ``\Lambda``, defined by
 
 ``` math
 (\Lambda h)_n =
@@ -229,7 +229,7 @@ denote this matrix by ``A_N``.
 For the tail of ``A`` we only consider the dominant part of
 ``DF(\overline{c})``, namely the operator ``\Lambda``. Note that this
 part doesn't depend on our approximation ``\overline{c}``. In this
-case we can explicitly compute the inverse ``\Lambda^{-1}``, it is
+case, we can explicitly compute the inverse ``\Lambda^{-1}``, it is
 given by
 
 ``` math
@@ -315,10 +315,11 @@ and get a bound from there.
 The next step is to bound ``Z_1``. We have
 
 ``` math
-DF(\overline{c}) = I - ADF(\overline{c}).
+DT(\overline{c}) = I - ADF(\overline{c}).
 ```
 
-From ``DF(\overline{c}) = \Lambda + L_\overline{c}`` and the definition of ``A`` we get
+From ``DF(\overline{c}) = \Lambda + L_\overline{c}`` and the
+definition of ``A`` we get
 
 ``` math
 ADF(\overline{c}) = A(\Lambda + L_\overline{c})
@@ -326,14 +327,14 @@ ADF(\overline{c}) = A(\Lambda + L_\overline{c})
 ```
 
 Note that similar to ``A``, this operator is block diagonal. The term
-``i_N A_N \Pi_N (\Lambda + L_\overline{c})`` acts purely on the subspace with
-indices up to ``N`` and ``\Lambda^{-1} \Pi_{> N} (\Lambda + L_\overline{c})``
-acts purely on the subspace with indices larger than ``N``. It is then
-a general result that the norm is given by the maximum of the two
-norms, namely
+``i_N A_N \Pi_N (\Lambda + L_\overline{c})`` acts purely on the
+subspace with indices up to ``N`` and ``\Lambda^{-1} \Pi_{> N}
+(\Lambda + L_\overline{c})`` acts purely on the subspace with indices
+larger than ``N``. It is then a general result that the norm is given
+by the maximum of the two norms, namely
 
 ``` math
-\|DF(\overline{c})\|_{\ell_\nu^1 \to \ell_\nu^1}
+\|DT(\overline{c})\|_{\ell_\nu^1 \to \ell_\nu^1}
 = \max\left(
 \left\|\Pi_N - i_N A_N \Pi_N (\Lambda + L_\overline{c})\right\|_{\ell_\nu^1 \to \ell_\nu^1}
 \left\|\Pi_{>N} - \Lambda^{-1} \Pi_{> N} (\Lambda + L_\overline{c})\right\|_{\ell_\nu^1 \to \ell_\nu^1}
@@ -401,7 +402,7 @@ its norm directly.
 
 ## Computing ``Z_2``
 
-Finally we get to ``Z_2``. In this case we have
+Finally we get to ``Z_2``. In this case, we have
 
 ``` math
 D^2T(\overline{c}) = AD^2F(\overline{c})
@@ -411,14 +412,17 @@ and hence
 
 ``` math
 \|D^2T(\overline{c})\|_{\ell_\nu^1 \times \ell_\nu^1 \to \ell_\nu^1}
-\leq \|A\|_{\ell_\nu^1 \to \ell_\nu^1} \|D^2T(\overline{c})\|_{\ell_\nu^1 \times \ell_\nu^1 \to \ell_\nu^1}.
+\leq \|A\|_{\ell_\nu^1 \to \ell_\nu^1} \|D^2F(\overline{c})\|_{\ell_\nu^1 \times \ell_\nu^1 \to \ell_\nu^1}.
 ```
 
 For ``A`` we have
 
 ``` math
 \|A\|_{\ell_\nu^1 \to \ell_\nu^1} \leq
-\|i_N A_N \Pi_N\|_{\ell_\nu^1 \to \ell_\nu^1} + \|\Lambda^{-1} \Pi_{>N}\|_{\ell_\nu^1 \to \ell_\nu^1}.
+\max\left(
+\|i_N A_N \Pi_N\|_{\ell_\nu^1 \to \ell_\nu^1},
+\|\Lambda^{-1} \Pi_{>N}\|_{\ell_\nu^1 \to \ell_\nu^1}
+\right).
 ```
 
 The first term is a finite matrix, whose norm we can compute. The
@@ -440,5 +444,5 @@ norm of ``2\nu``. We conclude that
 
 ``` math
 \|D^2T(\overline{c})\|_{\ell_\nu^1 \times \ell_\nu^1 \to \ell_\nu^1}
-\leq 2\nu\left(\|i_N A_N \Pi_N\|_{\ell_\nu^1 \to \ell_\nu^1} + \frac{1}{N + 1}\right).
+\leq 2\nu\max\left(\|i_N A_N \Pi_N\|_{\ell_\nu^1 \to \ell_\nu^1}, \frac{1}{N + 1}\right).
 ```

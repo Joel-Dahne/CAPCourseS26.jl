@@ -62,8 +62,6 @@ makedocs(
                 "week-14-lecture-2.md",
                 "week-14-lab.md",
                 "week-15-lecture-1.md",
-                "week-15-lecture-2.md",
-                "week-15-lab.md",
             ],
         ],
     ],

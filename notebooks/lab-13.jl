@@ -17,6 +17,14 @@ md"""
 # Lab 13 - Solving in sequence space - the radii polynomial approach
 
 The goal of this lab is to finish the example we have discussed in this week's lectures.
+
+Contrary to most earlier labs, the full code is already given. Instead, we will look at what happens when we change some parts of it. Some of the things you can try adjusting are:
+
+- The number ``N`` of terms in the finite part.
+- The precision used for the computations.
+- The value for ``ν``, which determines the radius of convergence.
+- Use a different approximation ``\overline{c}``.
+- Use a different choice of ``A``.
 """
 
 # ╔═╡ e431fd7b-132e-4e38-97ba-7766dffcfedd
@@ -144,8 +152,8 @@ Last time we defined the projection operator
 ``` math
 (\Pi_N c)_n =
 \begin{cases}
-  c_n \text{ if } n \leq N,
-  0 \text{ if } n > N.
+  c_n \text{ if } n \leq N,\\
+  0 \text{ if } n > N,
 \end{cases}
 ```
 
@@ -1810,13 +1818,13 @@ version = "1.13.0+0"
 # ╠═bdfc1901-d9f1-4b4a-802c-6a36851654f6
 # ╟─681e0edf-e0f7-410b-88a1-da52eaef40ff
 # ╠═52758d44-89d5-4a1c-b49b-38ba0879767f
-# ╠═9c878c88-03ed-4c40-8405-12b400ccfd82
+# ╟─9c878c88-03ed-4c40-8405-12b400ccfd82
 # ╠═dfa0cf55-d70d-4cc0-87a8-f8613bb2d446
 # ╟─05e97420-5854-48dc-a334-20dcd3696c2b
 # ╠═1c2206e9-f0d6-495c-bfea-c6c6bcf909f0
 # ╟─a926e571-5e47-4794-be9e-735f29c3cd84
 # ╠═08fccdfb-4ad7-4135-86db-0273a8a19845
-# ╠═93f2446b-e6f0-4f93-8130-280db05de80d
+# ╟─93f2446b-e6f0-4f93-8130-280db05de80d
 # ╠═ec7a541b-cd89-4d6d-a6a3-047a3f00bff1
 # ╠═1b8cb447-cc24-40b7-b9c6-d5ad31994c57
 # ╠═191b71be-095e-408c-b931-d9073df815a9

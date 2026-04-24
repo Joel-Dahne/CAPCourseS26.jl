@@ -16,7 +16,7 @@ end
 md"""
 # Lab 13 - Solving in sequence space - the radii polynomial approach
 
-The goal of this lab is to finish the example we have discussed in this weeks lectures.
+The goal of this lab is to finish the example we have discussed in this week's lectures.
 """
 
 # ╔═╡ e431fd7b-132e-4e38-97ba-7766dffcfedd
@@ -52,8 +52,7 @@ natural to use the type `ArbPoly` for representing such sequences.
     However, in this case we want to be able to compute full products of
     such sequences, in which case `ArbPoly` is a better choice.
 
-For example, the sequence given by ``c_0 = 1``, ``c_0 = 3`` and ``c_0
-= 5`` would be represented as
+For example, the sequence given by ``c_0 = 1``, ``c_1 = 3``, and ``c_2 = 5`` would be represented as
 """
 
 # ╔═╡ 9a62d3d3-5507-4e28-bb39-fe077b8151af
@@ -95,8 +94,8 @@ F(c_example)
 
 # ╔═╡ a9f11e9e-0d84-475a-81ac-edfc861c228d
 md"""
-We also want to implement the Frechet derivative, ``DF(c)``. In this
-case there is not finite representation, even if ``c`` is finite. We
+We also want to implement the Fréchet derivative, ``DF(c)``. In this
+case there is no finite representation, even if ``c`` is finite. We
 therefore only implement a version truncated to index ``N``.
 
 Recall that
@@ -180,9 +179,9 @@ end
 
 # ╔═╡ 46718c25-652f-4152-8060-db70dda60ee9
 md"""
-Finally, let us implement functions for computing the
+Finally, let us implement functions to compute the
 ``\|\cdot\|_\nu`` norm of a finite sequence as well as the associated
-operator norm for a finite linear operator.
+operator norm of a finite linear operator.
 """
 
 # ╔═╡ 2bd9a7f7-f857-4a3b-a28d-6f43fb43614f
@@ -315,7 +314,7 @@ F_c_bar = F(c_bar)
 
 # ╔═╡ 05e97420-5854-48dc-a334-20dcd3696c2b
 md"""
-For the first term we want to project and then multiple by ``A_N``.
+For the first term we want to project and then multiply by ``A_N``.
 Note that to perform the matrix multiplication we need to explicitly
 collect the coefficients of the `ArbPoly`.
 """
@@ -325,7 +324,7 @@ A_N_Π_N_F = ArbPoly(A_N * Arblib.coeffs(Π_N(F_c_bar)))
 
 # ╔═╡ a926e571-5e47-4794-be9e-735f29c3cd84
 md"""
-We can then compute the norm of this
+We can then compute its norm.
 """
 
 # ╔═╡ 08fccdfb-4ad7-4135-86db-0273a8a19845
@@ -334,7 +333,7 @@ norm_ν(A_N_Π_N_F)
 # ╔═╡ 93f2446b-e6f0-4f93-8130-280db05de80d
 md"""
 For the tail we use our implementation of ``\Lambda^{-1}``. Note that
-we are here relying on the fact that the tail is finite!
+we are relying on the fact that the tail is finite!
 """
 
 # ╔═╡ ec7a541b-cd89-4d6d-a6a3-047a3f00bff1
@@ -490,8 +489,7 @@ Z_2_part_1 = opnorm_ν(A_N)
 
 # ╔═╡ 76111c96-ff4d-4485-aa20-f4cb9bf5e256
 md"""
-The
-second term is bounded by ``\frac{1}{N + 1}`` since this is the
+The second term is bounded by ``\frac{1}{N + 1}`` since this is the
 largest scaling applied to indices larger than ``N``.
 """
 
@@ -510,7 +508,7 @@ For ``D^2T(\overline{c})`` we recall that it was given by
 \end{cases}
 ```
 
-It hence corresponds to a shift and multiplication by 2, giving us a
+It therefore corresponds to a shift and multiplication by 2, giving us a
 norm of ``2\nu``. We conclude that
 
 ``` math
@@ -526,7 +524,7 @@ Z_2 = 2ν * max(Z_2_part_1, Z_2_part_2)
 md"""
 ## Radii polynomial
 
-With ``Y``, ``Z_1`` and ``Z_2`` compute we defined the radii polynomials
+With ``Y``, ``Z_1``, and ``Z_2`` computed, we define the radii polynomial
 
 ``` math
 p(r) = Y + (Z_1 - 1)r + \frac{Z_2}{2} r^2
@@ -572,10 +570,10 @@ r_uniqueness = ArbExtras.refine_root(p, Arb(roots[2]))
 md"""
 We have thus proved that there is an exact solution to our problem in
 the ball centered at ``\overline{c}`` with radius `r_existence`.
-Moreover, this root is unique in the ball of radius `r_uniqueness`. 
+Moreover, this solution is unique in the ball of radius `r_uniqueness`.
 
-Note that if we want to get ``L^\infty`` error bounds for the Taylor
-expansion associated with the approximation we need to do slightly
+Note that if we want to obtain ``L^\infty`` error bounds for the Taylor
+expansion associated with the approximation, we need to do slightly
 more work.
 """
 

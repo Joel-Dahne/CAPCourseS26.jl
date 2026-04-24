@@ -291,7 +291,7 @@ AF(\overline{c}) = i_N A_N \Pi_N F(\overline{c}) + \Lambda^{-1} \Pi_{> N} F(\ove
 giving us
 
 ``` math
-\|AF(\overline{c})\|_\nu = \|i_N A_N \Pi_N F(\overline{c})\|_\nu + \|\Lambda^{-1} \Pi_{> N} F(\overline{c})\|_\nu.
+\|AF(\overline{c})\|_\nu \leq \|i_N A_N \Pi_N F(\overline{c})\|_\nu + \|\Lambda^{-1} \Pi_{> N} F(\overline{c})\|_\nu.
 ```
 
 For the first term we note that
@@ -335,7 +335,7 @@ by the maximum of the two norms, namely
 ``` math
 \|DT(\overline{c})\|_{\ell_\nu^1 \to \ell_\nu^1}
 = \max\left(
-\left\|\Pi_N - i_N A_N \Pi_N (\Lambda + L_{\overline{c}})\right\|_{\ell_\nu^1 \to \ell_\nu^1}
+\left\|\Pi_N - i_N A_N \Pi_N (\Lambda + L_{\overline{c}})\right\|_{\ell_\nu^1 \to \ell_\nu^1},
 \left\|\Pi_{>N} - \Lambda^{-1} \Pi_{> N} (\Lambda + L_{\overline{c}})\right\|_{\ell_\nu^1 \to \ell_\nu^1}
 \right).
 ```

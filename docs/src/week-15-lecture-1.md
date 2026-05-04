@@ -146,8 +146,8 @@ these conventions also tend to depend on the programming language the
 code is written in. For example, in Julia it is very easy to
 explicitly specify the versions of all dependencies, whereas this is
 harder in e.g. Python. There are also more established standards for
-how to write tests in Julia compared to e.g. C, which tends to
-increase the chance that tests are written.
+how to write tests in Julia compared to, for example, C, which tends
+to increase the chance that tests are written.
 
 ## My setup
 
@@ -181,3 +181,43 @@ following structure:
 - `test` contains tests for parts of the code. In particular, I try to
   test numerical parts of the code where small errors could give
   plausible-looking, but incorrect, results.
+
+How the Pluto notebooks are structured largely depends on what they
+are meant to prove. When possible I try to keep a similar structure between
+the notebook and the proof of the lemma in the paper. In general I
+want the notebooks to contain descriptions of what is being computed
+and why it is being computed. To get the full details you would have
+to read the paper as well, but having some of the details in the
+notebook makes it easier to follow. As an example, you can look at the
+notebook for Lemma 2.7 in
+[SpectralRegularPolygon.jl](https://github.com/Joel-Dahne/SpectralRegularPolygon.jl)
+and compare to the lemma in the
+[paper](https://arxiv.org/abs/2601.16285).
+
+Writing tests for the code can increase your confidence in the code
+being correct. For numerical code it is often a good idea to write
+code that checks some of the invariances that you know your function
+should satisfy. For example, the function `SRP.integral_log(m::Int,
+a::Arb)` is supposed to compute the integral of ``\log(x)^m`` from
+``0`` to ``a``. Due to the singularity at ``x = 0`` the integral
+cannot be computed directly using (rigorous) numerical integration.
+However, if we compute `SRP.integral_log(m, b) - SRP.integral_log(m,
+a)` this gives us the integral from ``a`` to ``b``, which we can
+compute using numerical integration. We can thus check that this
+property is satisfied by writing a test like
+
+``` julia
+@testset "integral_log" begin
+    # Check that the difference when integrating to a and when
+    # integrating to b is the same as the integral from a to b.
+    a = Arb(0.25)
+    b = Arb(0.5)
+    z = Acb(0.4, 0.6)
+    for m = 0:5
+        @test Arblib.overlaps(
+            SRP.integral_log(m, b) - SRP.integral_log(m, a),
+            Arb(Arblib.integrate(x -> log(x)^m, a, b)),
+        )
+    end
+end
+```

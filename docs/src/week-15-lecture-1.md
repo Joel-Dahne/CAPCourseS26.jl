@@ -149,7 +149,7 @@ harder in e.g. Python. There are also more established standards for
 how to write tests in Julia compared to, for example, C, which tends
 to increase the chance that tests are written.
 
-## My setup
+### My setup
 
 I usually structure my repositories as a Julia package. This gives the
 following structure:
@@ -221,3 +221,9 @@ property is satisfied by writing a test like
     end
 end
 ```
+
+## How to present computer-assisted computations in the paper
+
+Another thing to consider is how to present the computer-assisted
+computations when writing the paper. If time permits we will discuss
+some of this during the lecture.

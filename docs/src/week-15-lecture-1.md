@@ -11,12 +11,12 @@ A computer-assisted proof will necessarily include some amount of
 code. Before we get into what this code should look like, let us start
 with the most basic question: how should this code be published?
 
-If the code is extremely short, one option is to explicitly give the
-code directly in the paper. In that case there is essentially no
+If the code is extremely short, one option is to explicitly include
+the code in the paper. In that case there is essentially no
 difference compared to publishing a traditional paper. This could be
 the case if the computer is only used in a small part of the paper for
 doing some relatively simple computation. For example, the proof for
-Proposition II.2 discussed in Lab 3 could fall into this category, it
+Proposition II.2 discussed in Lab 3 could fall into this category; it
 requires only a handful of lines of code.
 
 As soon as the code gets a little bit longer, direct inclusion in the
@@ -26,7 +26,7 @@ to do this:
 
 1. Giving the code as supplementary material, which is published
    alongside the paper by the journal. For arXiv it is possible to
-   upload the code together with the tex-file.
+   upload the code together with the TeX file.
 2. Putting the code on a website and linking to that in the paper.
 
 The first approach is relatively simple and follows the usual paths
@@ -37,25 +37,25 @@ supplementary material. An example of a paper doing this is [Smooth
 imploding solutions for 3D compressible
 fluids](https://doi.org/10.1017/fmp.2024.12). However, I haven't
 actually been able to figure out how to find the supplementary
-material on the publishers website. The original [arXiv
+material on the publisher's website. The original [arXiv
 version](https://arxiv.org/abs/2208.09445v1) has the code included if
-you download the TeX Source, however the latest arXiv version doesn't
+you download the TeX source; however, the latest arXiv version doesn't
 have the code included.
 
 The second approach, putting the code on a website and linking to it
-in the paper, the first question to ask is which website to put it on.
+in the paper, raises the question of which website to use.
 
-Arguably the most common website to use nowadays is Github. In that
-case you create a (public) Github repository and link to that in the
+Arguably the most common website to use nowadays is GitHub. In that
+case, you create a (public) GitHub repository and link to that in the
 paper. This is what I have done for all of my papers.
 
 For example, the paper [Highest cusped waves for the fractional KdV
 equations](https://doi.org/10.1016/j.jde.2024.05.016) contains links
-to the Github repository
+to the GitHub repository
 [HighestCuspedWave.jl](https://github.com/Joel-Dahne/HighestCuspedWave.jl).
 In this case the journal treats the repository as a dataset and adds a
 link to it. We also explicitly cite the repository in the paper, using
-the Bibtex key
+the BibTeX key
 
 ```
 @software{HighestCuspedWave,
@@ -69,38 +69,38 @@ the Bibtex key
 
 Note the commit hash included in the note. This ensures that one can
 verify the exact version of the code that was used for the paper. This
-can be useful for example if an update is made to the paper and one
-want to be able to distinguish the different versions of the code.
+can be useful, for example, if an update is made to the paper and you
+want to be able to distinguish between different versions of the code.
 
-Some alternatives to Github would be
-[Gitlab](https://about.gitlab.com/) and
-[Codeberg](https://codeberg.org/). In principle one can use any
-website, for example Dropbox or ones personal website.
+Some alternatives to GitHub would be
+[GitLab](https://about.gitlab.com/) and
+[Codeberg](https://codeberg.org/). In principle, one can use any
+website, for example Dropbox or one's personal website.
 
-An important consideration when considering where to host the code is
-the longevity of it. Journals have systems in place to make sure that
-the articles are available also in the future. If you put your code on
-an arbitrary website, this might no longer be the case. This is
+An important consideration when deciding where to host the code is
+its longevity. Journals have systems in place to make sure that the
+articles are available in the future. If you put your code on an
+arbitrary website, this might no longer be the case. This is
 particularly bad for websites such as Dropbox (what happens if you
 stop paying for it) or personal websites (what happens if you stop
-maintaining the website or when you retire?). Github is also not
-immune to this problem, Github doesn't give you any guarantees for how
+maintaining the website or when you retire?). GitHub is also not
+immune to this problem; GitHub doesn't give you any guarantees for how
 long into the future your repository will be available.
 
 One website that tries to improve on the issue of longevity is
-[Zenodo](https://zenodo.org/). The allow you to update your code (or
-link a Github repository) and archives it, also giving you a doi link
-that you can reference. It is run by CERN and they clam:
+[Zenodo](https://zenodo.org/). They allow you to upload your code (or
+link a GitHub repository) and archive it, also giving you a DOI link
+that you can reference. It is run by CERN and they claim:
 
 > Your research is stored safely for the future in CERN’s Data Centre for as long as CERN exists
 
 I haven't used this for any of my papers (though maybe I should do
-that), but I have used it for Arblib.jl, it has a [Zenodo
+that), but I have used it for Arblib.jl. It has a [Zenodo
 page](https://zenodo.org/records/18512759) that both ensures the code
-is archived and that is has a doi that can be used when citing it (you
-can download a Bibtex entry from the website).
+is archived and that it has a DOI that can be used when citing it (you
+can download a BibTeX entry from the website).
 
-Note that the issues with publishing code is not unique to
+Note that the issue of publishing code is not unique to
 computer-assisted proofs. It is similar for any paper (in any field)
 which includes code. I believe journals are getting better processes
 for handling this and hopefully the situation improves even further in
@@ -118,21 +118,21 @@ eigenvalue of regular polygons](https://arxiv.org/abs/2601.16285).
 
 We will look at the following aspects:
 
-- Reproducability: Are there instructions for how to reproduce the
+- Reproducibility: Are there instructions for how to reproduce the
   results in the paper? Can we reproduce the exact numbers and figures
   in the paper? Does the repository specify exactly what versions of
   the libraries it depends on?
 - Documentation: Can you understand what the code does? Is there a
-  high level description of the code? How does it reference the paper?
+  high-level description of the code? How does it reference the paper?
   Are there descriptions of individual functions? How do these
-  reference for example equations or lemmas from the paper? Is it
+  reference, for example, equations or lemmas from the paper? Is it
   clear what part of the code is used for proving specific results in
   the paper?
 - Tests: Are there any tests included with the code? Has there been
-  any attempts at ensuring that the code is correct and computes what
+  any attempt at ensuring that the code is correct and computes what
   it claims to produce?
 - Results: Can you see the results without running any of the code?
-  This is particularly important for code which takes a long time to
+  This is particularly important for code that takes a long time to
   run, in which case you might want to precompute some of the data.
 
 Note that these questions are not specific to computer-assisted
@@ -141,11 +141,13 @@ computer-assisted proofs since the result relies on the correctness of
 the code in a more direct way than many numerical papers.
 
 Different authors have very different conventions for things like how
-much documentation is provided or if there are any tests. Some of
+much documentation is provided or whether there are any tests. Some of
 these conventions also tend to depend on the programming language the
-code is written in. For example, Julia makes it very easy to
+code is written in. For example, in Julia it is very easy to
 explicitly specify the versions of all dependencies, whereas this is
-harder in e.g. Python.
+harder in e.g. Python. There are also more established standards for
+how to write tests in Julia compared to e.g. C, which tends to
+increase the chance that tests are written.
 
 ## My setup
 
@@ -163,19 +165,19 @@ following structure:
 └── README.md
 ```
 
-- `README.md` contains high level documentation.
+- `README.md` contains high-level documentation.
 - `Manifest.toml` and `Project.toml` contain information about the
   exact packages used.
-- `LICENSE` contains a software license (usually MIT)
+- `LICENSE` contains a software license (usually MIT).
 - `proofs` contains Pluto notebooks that produce the results in the
   paper. They contain a brief description of what they compute and how
-  it is done. All the numbers and figures appearing in the paper are
-  coming from these notebooks. I also export the notebooks to HTML so
-  that it is possible to see the computational results without having
-  to run any code.
+  it is done. All the numbers and figures appearing in the paper come
+  from these notebooks. I also export the notebooks to HTML so that
+  it is possible to see the computational results without having to
+  run any code.
 - `src` contains implementations that are shared between multiple
-  notebooks or that are too large to be able to be able to put inside
-  a single notebook.
+  notebooks or that are too large to be able to put inside a single
+  notebook.
 - `test` contains tests for parts of the code. In particular, I try to
   test numerical parts of the code where small errors could give
-  plausible looking, but incorrect, results.
+  plausible-looking, but incorrect, results.
